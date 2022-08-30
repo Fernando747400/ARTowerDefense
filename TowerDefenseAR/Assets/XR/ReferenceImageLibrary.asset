@@ -18,12 +18,22 @@ MonoBehaviour:
     m_Storage: []
   m_Images:
   - m_SerializedGuid:
-      m_GuidLow: 4687744875170704881
-      m_GuidHigh: 8192765565409150345
+      m_GuidLow: 5741862200779512145
+      m_GuidHigh: 4439399266588716693
     m_SerializedTextureGuid:
-      m_GuidLow: 14399186365751468230
-      m_GuidHigh: 2278057339688156696
-    m_Size: {x: 0.5, y: 0.28125}
-    m_SpecifySize: 1
-    m_Name: Unity-logo
+      m_GuidLow: 9125543281007883662
+      m_GuidHigh: 12132446956401642553
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: Tarjetass
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5047959751475886530
+      m_GuidHigh: 13120177942742688147
+    m_SerializedTextureGuid:
+      m_GuidLow: 8603030865099767995
+      m_GuidHigh: 3613230503833793211
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: 2222
     m_Texture: {fileID: 0}
