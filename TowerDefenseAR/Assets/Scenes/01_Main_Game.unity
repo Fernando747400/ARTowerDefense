@@ -1222,6 +1222,37 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1029946873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1029946874}
+  m_Layer: 0
+  m_Name: Bullet_Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1029946874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029946873}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.2}
+  m_LocalScale: {x: 0.06, y: 0.06, z: 0.06}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1032137746}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1032137745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,6 +1284,7 @@ Transform:
   - {fileID: 288980171}
   - {fileID: 2023358262}
   - {fileID: 2113816699}
+  - {fileID: 1029946874}
   m_Father: {fileID: 1902318092}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1726,7 +1758,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _YawPoint: {fileID: 1641687567}
   _PitchPoint: {fileID: 1032137745}
+  _BulletPrefab: {fileID: 2134626009041227501, guid: 31efa89a5835ce341ac00b66c0f52aea, type: 3}
+  _BulletSpawner: {fileID: 1029946873}
   _SpeedDamp: 5
+  _SpeedBullet: 50
   Enemy: {fileID: 1564183048}
 --- !u!1 &2023358261
 GameObject:
