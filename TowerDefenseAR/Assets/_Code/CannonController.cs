@@ -8,16 +8,25 @@ public class CannonController : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private GameObject _YawPoint;
     [SerializeField] private GameObject _PitchPoint;
+    [SerializeField] private GameObject _BulletPrefab;
+    [SerializeField] private GameObject _BulletSpawner;
 
     [Header("Settings")]
     [SerializeField] private float _SpeedDamp;
+    [SerializeField] private float _SpeedBullet;
+
+    private Vector3 _direction;
 
     public GameObject Enemy;
+
+    
 
     private void Update()
     {
         LookAt(_YawPoint, Enemy,'y');
         LookAt(_PitchPoint, Enemy, 'a');
+
+        if (Input.GetKeyDown(KeyCode.O)) Shoot();
     }
 
     private void LookAt(GameObject looker, GameObject target, char axis)
@@ -47,12 +56,24 @@ public class CannonController : MonoBehaviour
 
             default:
                 Debug.Log("Incorrect axis or casing typed");
-                return;
+                rotation = Vector3.zero;
                 break;
         }
        
         looker.transform.rotation = Quaternion.Euler(rotation);
     }
 
+    private void Shoot()
+    {
+        GameObject bullet;
+        _direction = _BulletSpawner.transform.position - _PitchPoint.transform.position;
+        _direction.Normalize();
+        _direction = _direction * _SpeedBullet;
 
+        bullet = Instantiate(_BulletPrefab, _BulletSpawner.transform.position, Quaternion.identity, _BulletSpawner.transform);
+        bullet.GetComponent<Rigidbody>().AddForce(_direction, ForceMode.Impulse);
+        bullet.transform.parent = null;
+    }
+
+    //TODO https://www.forrestthewoods.com/blog/solving_ballistic_trajectories/
 }
