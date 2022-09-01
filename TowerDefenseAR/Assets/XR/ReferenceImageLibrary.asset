@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
+  m_Name: ReferenceImageLibrary
+  m_EditorClassIdentifier: 
+  m_GuidLow: 4991022845679253785
+  m_GuidHigh: 16838045883625601718
+  m_DataStore:
+    m_Storage: []
+  m_Images:
+  - m_SerializedGuid:
+      m_GuidLow: 5487983720014984723
+      m_GuidHigh: 2175341426730490550
+    m_SerializedTextureGuid:
+      m_GuidLow: 456256140706219696
+      m_GuidHigh: 8627103707963578698
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: 1.0
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4776770066778334169
+      m_GuidHigh: 11165037871206112160
+    m_SerializedTextureGuid:
+      m_GuidLow: 10274043016429505883
+      m_GuidHigh: 14940356324799116139
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: Tower
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5230248195390109723
+      m_GuidHigh: 411622802702536126
+    m_SerializedTextureGuid:
+      m_GuidLow: 15187537164000596759
+      m_GuidHigh: 5909932066876257401
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: 3.0
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5184823802548356839
+      m_GuidHigh: 6482145232337607572
+    m_SerializedTextureGuid:
+      m_GuidLow: 10589230224039477279
+      m_GuidHigh: 2440424916761673483
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: 4.0
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5398075487093906043
+      m_GuidHigh: 190703359687518379
+    m_SerializedTextureGuid:
+      m_GuidLow: 9526469196958259737
+      m_GuidHigh: 14140705657435284955
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: 5.0
+    m_Texture: {fileID: 0}
