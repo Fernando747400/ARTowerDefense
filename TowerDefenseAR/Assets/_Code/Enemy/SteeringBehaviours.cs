@@ -10,21 +10,24 @@ public class SteeringBehaviours : MonoBehaviour
     //direction in which the enemy is moving.
     Vector3 currentVector;
     int layerMask;
+    string behaviour;
+    [SerializeField] float avoidanceStrength;
+    List<Collider> obstaclesList = new List<Collider>();
+
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Tick());
         layerMask =~ LayerMask.GetMask("Enemy");
-    }
 
+    }
     // Update is called once per frame
     void Update()
     {
         Move();
+        // Debug.Log(behaviour);
     }
-
-    
     Vector3 Seek(Vector3 targetPos)
     {
         //moves towards target
@@ -79,24 +82,18 @@ public class SteeringBehaviours : MonoBehaviour
         //seeks target while avoiding obstacles
         Vector3 distanceVector = targetPos - transform.position;
         Vector3 steeringForce = distanceVector + currentVector;
-        Vector3 result = Vector3.Normalize(distanceVector + steeringForce);
+        Vector3 temp;;
+        
+
+        for (int i = 0; i < obstaclesList.Count; i++)
+        {
+            temp = obstaclesList[i].transform.position;
+        }
+        Vector3 avoidanceVector = transform.position - obstaclesList[1].transform.position; 
+
+        Vector3 result = Vector3.Normalize(distanceVector + steeringForce + avoidanceVector);
         return result;
 
-    }
-    void ReCast()
-    {
-        Collider[] obstacles = Physics.OverlapSphere(transform.position,1,layerMask);
-        Queue obstaclesQ = new Queue();
-        if (obstacles.Length > 0)
-        {
-            foreach (Collider obstacle in obstacles)
-            {
-                obstaclesQ.Enqueue(obstacle);
-
-            }
-
-
-        }
     }
 
     IEnumerator Tick()
@@ -105,17 +102,50 @@ public class SteeringBehaviours : MonoBehaviour
         {
             ReCast();
             yield return new WaitForSeconds(.33f);
-
-
         }
     }
     
-
     void Move()
     {
-        Vector3 steering = Avoid(target.transform.position);
-        //speed = Arrival(target.transform.position);
-        transform.position += (currentVector + steering * speed) * Time.fixedDeltaTime;
+        Vector3 steering;
 
+        switch (behaviour)
+        {
+            case "avoid":
+            steering = Avoid(target.transform.position);
+            transform.position += (currentVector + steering * speed) * Time.fixedDeltaTime;
+            break;
+
+            default:
+            steering = Seek(target.transform.position);
+            transform.position += (currentVector + steering * speed) * Time.fixedDeltaTime;
+            break;
+        }
+        //speed = Arrival(target.transform.position);
+
+    }
+    void ReCast()
+    {
+        Collider[] obstacles = Physics.OverlapSphere(transform.position,2,layerMask);
+
+        if(obstacles.Length != 0)
+        {
+            behaviour = "avoid";
+
+        }else
+        {
+            behaviour = "seek";
+        }
+        for (int i = 0; i < obstacles.Length; i++)
+        {
+            if (! obstaclesList.Contains(obstacles[i]))
+            {
+                obstaclesList.Add(obstacles[i]);
+                // Debug.Log("Added " + obstacles[i].name + " to list.");
+                
+            }
+            
+        }
+        
     }
 }
