@@ -35,7 +35,7 @@ MonoBehaviour:
       m_GuidHigh: 14940356324799116139
     m_Size: {x: 0, y: 0}
     m_SpecifySize: 0
-    m_Name: Tower
+    m_Name: Center
     m_Texture: {fileID: 0}
   - m_SerializedGuid:
       m_GuidLow: 5230248195390109723
@@ -55,7 +55,7 @@ MonoBehaviour:
       m_GuidHigh: 2440424916761673483
     m_Size: {x: 0, y: 0}
     m_SpecifySize: 0
-    m_Name: 4.0
+    m_Name: Tower
     m_Texture: {fileID: 0}
   - m_SerializedGuid:
       m_GuidLow: 5398075487093906043
@@ -65,5 +65,5 @@ MonoBehaviour:
       m_GuidHigh: 14140705657435284955
     m_Size: {x: 0, y: 0}
     m_SpecifySize: 0
-    m_Name: 5.0
+    m_Name: Lasser
     m_Texture: {fileID: 0}
