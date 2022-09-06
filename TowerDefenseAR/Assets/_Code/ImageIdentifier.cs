@@ -32,9 +32,9 @@ public class ImageIdentifier : MonoBehaviour
     
     private void UpdatedImage(ARTrackedImagesChangedEventArgs args)
     {
-        
-        _gameObjects.Add(GameObject.FindGameObjectWithTag("TrackedImage"));
-        reference.text = "Add obj to list";
+         GameObject gameObject =GameObject.FindGameObjectWithTag("TrackedImage") ;
+        _gameObjects.Add(gameObject);
+        reference.text = "Add obj to list" + gameObject.name;
 
         foreach (var item in args.added)
         {
@@ -46,17 +46,17 @@ public class ImageIdentifier : MonoBehaviour
                     {
                         if (obj.name == "Tower")
                         {
-                            reference.text = obj.name;
+                            reference.text =" Mover Game Objetc = " +obj.name;
                             PositionsController pos = obj.GetComponent<PositionsController>();
                             pos.RePostionGO(item);
                         }
                     }
                     break;
              
-                case "Lasser":
+                case "Laser":
                     foreach (var obj in _gameObjects)
                     {
-                        if (obj.name == "Lasser")
+                        if (obj.name == "Laser")
                         {
                             reference.text = obj.name;
 

@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2400214167793196141, guid: 9aabfdba0a9306b4691552a220182cb7, type: 3}
       propertyPath: m_Name
-      value: Center
+      value: Center Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3590353672276378957, guid: 9aabfdba0a9306b4691552a220182cb7, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -59,5 +59,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5712532277824407391, guid: 9aabfdba0a9306b4691552a220182cb7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9aabfdba0a9306b4691552a220182cb7, type: 3}
