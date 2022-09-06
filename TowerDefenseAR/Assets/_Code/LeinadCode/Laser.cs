@@ -4,77 +4,44 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    public LineRenderer line;
+    public int maxBounceEnemy;
+    private LineRenderer line;
     public List<GameObject> enemies;
-    public string objectToAdd;
     int index = -1;
-
-    //public Queue enemies = new Queue();
+    private SphereCollider sphere;
 
     void Start()
     {
+        sphere = GetComponent<SphereCollider>();
         line = GetComponent<LineRenderer>();
-        objectToAdd = "LaserBeam";
-        AddEnemy();
+        AddLaser();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-
-        
-    }
-
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
         {
+            enemies.Capacity = maxBounceEnemy;
             Debug.Log("Colisiona");
-
-            objectToAdd = "Enemy";
             index = index + 1;
-            enemies.Insert(index, other.gameObject);
-            line.positionCount = enemies.Count;
-
-            foreach (var item in enemies)
+            if(index < enemies.Capacity)
             {
-                line.SetPosition(enemies.Count - 1, item.transform.position);
-                Debug.Log(enemies.Count - 1, item);
+                enemies.Insert(index, other.gameObject);
+                line.positionCount = enemies.Count;
+                foreach (var item in enemies)
+                {
+                    line.SetPosition(enemies.Count - 1, item.transform.position);
+                    Debug.Log(enemies.Count - 1, item);
+                }
+                StartCoroutine(UpdateShoot());
             }
         }
     }
 
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Enemy")
-        {
-            Debug.Log("Colisiona");
-
-            objectToAdd = "Enemy";
-            index = index + 1;
-            enemies.Insert(index, other.gameObject);
-            line.positionCount = enemies.Count;
-
-            foreach (var item in enemies)
-            {
-                line.SetPosition(enemies.Count - 1, item.transform.position);
-                Debug.Log(enemies.Count - 1, item);
-            }
-        } 
-    }
-    */
-
-    private void OnTriggerExit(Collider other)
-    {
-
-    }
-
-    void AddEnemy()
+    void AddLaser()
     {
         index = index + 1;
-        enemies.Insert(index, GameObject.FindGameObjectWithTag(objectToAdd));
+        enemies.Insert(index, this.gameObject);
         line.positionCount = enemies.Count;
 
         foreach (var item in enemies)
@@ -83,4 +50,24 @@ public class Laser : MonoBehaviour
             Debug.Log(enemies.Count -1, item);
         }
     }
+    private IEnumerator UpdateShoot()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(0.2f);
+            sphere.enabled = false;
+            enemies.Clear();
+            index = -1;
+            AddLaser();
+            StartCoroutine(CanShoot()); 
+        }
+    }
+    
+    private IEnumerator CanShoot()
+    {
+        yield return new WaitForSeconds(2);
+        sphere.enabled = true;
+        StopAllCoroutines();
+    }
+    
 }

@@ -18,36 +18,6 @@ MonoBehaviour:
     m_Storage: []
   m_Images:
   - m_SerializedGuid:
-      m_GuidLow: 5487983720014984723
-      m_GuidHigh: 2175341426730490550
-    m_SerializedTextureGuid:
-      m_GuidLow: 456256140706219696
-      m_GuidHigh: 8627103707963578698
-    m_Size: {x: 0, y: 0}
-    m_SpecifySize: 0
-    m_Name: 1.0
-    m_Texture: {fileID: 0}
-  - m_SerializedGuid:
-      m_GuidLow: 4776770066778334169
-      m_GuidHigh: 11165037871206112160
-    m_SerializedTextureGuid:
-      m_GuidLow: 10274043016429505883
-      m_GuidHigh: 14940356324799116139
-    m_Size: {x: 0, y: 0}
-    m_SpecifySize: 0
-    m_Name: Tower
-    m_Texture: {fileID: 0}
-  - m_SerializedGuid:
-      m_GuidLow: 5230248195390109723
-      m_GuidHigh: 411622802702536126
-    m_SerializedTextureGuid:
-      m_GuidLow: 15187537164000596759
-      m_GuidHigh: 5909932066876257401
-    m_Size: {x: 0, y: 0}
-    m_SpecifySize: 0
-    m_Name: 3.0
-    m_Texture: {fileID: 0}
-  - m_SerializedGuid:
       m_GuidLow: 5184823802548356839
       m_GuidHigh: 6482145232337607572
     m_SerializedTextureGuid:
@@ -55,7 +25,7 @@ MonoBehaviour:
       m_GuidHigh: 2440424916761673483
     m_Size: {x: 0, y: 0}
     m_SpecifySize: 0
-    m_Name: 4.0
+    m_Name: Tower
     m_Texture: {fileID: 0}
   - m_SerializedGuid:
       m_GuidLow: 5398075487093906043
@@ -65,5 +35,15 @@ MonoBehaviour:
       m_GuidHigh: 14140705657435284955
     m_Size: {x: 0, y: 0}
     m_SpecifySize: 0
-    m_Name: 5.0
+    m_Name: Laser
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5195714048816291914
+      m_GuidHigh: 8826274859425403070
+    m_SerializedTextureGuid:
+      m_GuidLow: 9125543281007883662
+      m_GuidHigh: 12132446956401642553
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: Center
     m_Texture: {fileID: 0}
