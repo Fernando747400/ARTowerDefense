@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,7 +26,7 @@ public class CannonController : MonoBehaviour
     {
         LookAt(_YawPoint, Enemy,'y');
         LookAt(_PitchPoint, Enemy, 'a');
-
+        CalculateAngle();
         if (Input.GetKeyDown(KeyCode.O)) Shoot();
     }
 
@@ -52,6 +53,7 @@ public class CannonController : MonoBehaviour
                 break;
 
             case 'a':
+                rotation.x = -(float)CalculateAngle();
                 break;
 
             default:
@@ -59,7 +61,7 @@ public class CannonController : MonoBehaviour
                 rotation = Vector3.zero;
                 break;
         }
-       
+        Debug.Log("X value " + rotation.x);
         looker.transform.rotation = Quaternion.Euler(rotation);
     }
 
@@ -68,11 +70,22 @@ public class CannonController : MonoBehaviour
         GameObject bullet;
         _direction = _BulletSpawner.transform.position - _PitchPoint.transform.position;
         _direction.Normalize();
+        //float force = (Vector3.Distance(_BulletSpawner.transform.position, Enemy.transform.position) / 0.5f);
         _direction = _direction * _SpeedBullet;
 
         bullet = Instantiate(_BulletPrefab, _BulletSpawner.transform.position, Quaternion.identity, _BulletSpawner.transform);
         bullet.GetComponent<Rigidbody>().AddForce(_direction, ForceMode.Impulse);
         bullet.transform.parent = null;
+    }
+
+    private double CalculateAngle()
+    {
+        double range = Vector3.Distance(Enemy.transform.position, this.transform.position);
+        double angle = (1/2) * (Math.Asin((9.8 * range) / Mathf.Pow(_SpeedBullet, 2)));
+        angle = angle * (180 / Math.PI);
+        Debug.Log(range);
+        Debug.Log(angle);
+        return angle;
     }
 
     //TODO https://www.forrestthewoods.com/blog/solving_ballistic_trajectories/
