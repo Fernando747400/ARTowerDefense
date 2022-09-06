@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class CannonController : MonoBehaviour
@@ -7,29 +8,72 @@ public class CannonController : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private GameObject _YawPoint;
     [SerializeField] private GameObject _PitchPoint;
+    [SerializeField] private GameObject _BulletPrefab;
+    [SerializeField] private GameObject _BulletSpawner;
 
     [Header("Settings")]
     [SerializeField] private float _SpeedDamp;
+    [SerializeField] private float _SpeedBullet;
+
+    private Vector3 _direction;
 
     public GameObject Enemy;
 
+    
+
     private void Update()
     {
-        LookAtEnemey();
+        LookAt(_YawPoint, Enemy,'y');
+        LookAt(_PitchPoint, Enemy, 'a');
+
+        if (Input.GetKeyDown(KeyCode.O)) Shoot();
     }
 
-    private void LookAtEnemey()
+    private void LookAt(GameObject looker, GameObject target, char axis)
     {
-        Vector3 targetPositionHorizontal = _YawPoint.transform.position - Enemy.transform.position;
-        targetPositionHorizontal.y = 0;
-        var yawRotation = Quaternion.LookRotation(targetPositionHorizontal);
-        transform.rotation = Quaternion.Slerp(_YawPoint.transform.rotation, yawRotation, _SpeedDamp * Time.deltaTime);
+        Vector3 targetVector = target.transform.position - looker.transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(targetVector);
+        Vector3 rotation = lookRotation.eulerAngles;
+        switch (axis)
+        {
+            case 'x':
+                rotation.y = 0;
+                rotation.z = 0;
+                break;
 
-        Vector3 targetPositionVertical = _PitchPoint.transform.position - Enemy.transform.position;
-        targetPositionVertical.x = 0;
-        var pitchRotation = Quaternion.LookRotation(targetPositionVertical);
-        transform.rotation = Quaternion.Slerp(_PitchPoint.transform.rotation, pitchRotation, _SpeedDamp * Time.deltaTime);
+            case 'y':
+                rotation.x = 0;
+                rotation.z = 0;
+                break;
+
+            case 'z':
+                rotation.x = 0;
+                rotation.y = 0;
+                break;
+
+            case 'a':
+                break;
+
+            default:
+                Debug.Log("Incorrect axis or casing typed");
+                rotation = Vector3.zero;
+                break;
+        }
+       
+        looker.transform.rotation = Quaternion.Euler(rotation);
     }
 
+    private void Shoot()
+    {
+        GameObject bullet;
+        _direction = _BulletSpawner.transform.position - _PitchPoint.transform.position;
+        _direction.Normalize();
+        _direction = _direction * _SpeedBullet;
 
+        bullet = Instantiate(_BulletPrefab, _BulletSpawner.transform.position, Quaternion.identity, _BulletSpawner.transform);
+        bullet.GetComponent<Rigidbody>().AddForce(_direction, ForceMode.Impulse);
+        bullet.transform.parent = null;
+    }
+
+    //TODO https://www.forrestthewoods.com/blog/solving_ballistic_trajectories/
 }
