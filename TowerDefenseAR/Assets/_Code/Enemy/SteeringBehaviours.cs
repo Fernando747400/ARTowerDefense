@@ -7,12 +7,15 @@ public class SteeringBehaviours : MonoBehaviour
 
     [SerializeField] GameObject target;
     [SerializeField] private float speed;
+    //direction in which the enemy is moving.
     Vector3 currentVector;
+    int layerMask;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Tick());
+        layerMask =~ LayerMask.GetMask("Enemy");
     }
 
     // Update is called once per frame
@@ -80,28 +83,36 @@ public class SteeringBehaviours : MonoBehaviour
         return result;
 
     }
-
     void ReCast()
     {
-        Collider[] obstacles = Physics.OverlapSphere(transform.position,2,0);
-        if (obstacles != null)
+        Collider[] obstacles = Physics.OverlapSphere(transform.position,1,layerMask);
+        Queue obstaclesQ = new Queue();
+        if (obstacles.Length > 0)
         {
-            
-            Debug.Log("Contact");
-        }
+            foreach (Collider obstacle in obstacles)
+            {
+                obstaclesQ.Enqueue(obstacle);
 
+            }
+
+
+        }
     }
 
     IEnumerator Tick()
     {
-        ReCast();
-        yield return new WaitForSeconds(.5f);
+        while(true)
+        {
+            ReCast();
+            yield return new WaitForSeconds(.33f);
+
+
+        }
     }
     
 
     void Move()
     {
-
         Vector3 steering = Avoid(target.transform.position);
         //speed = Arrival(target.transform.position);
         transform.position += (currentVector + steering * speed) * Time.fixedDeltaTime;
