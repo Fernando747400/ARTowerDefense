@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Spawner : MonoBehaviour
+public class Spawner_UI_Controller : MonoBehaviour
 {
     int numInstancesCenter = 0;
     
