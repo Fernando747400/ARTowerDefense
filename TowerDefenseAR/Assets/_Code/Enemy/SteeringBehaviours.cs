@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SteeringBehaviours : MonoBehaviour
 {
@@ -8,9 +9,13 @@ public class SteeringBehaviours : MonoBehaviour
     [SerializeField] GameObject target;
     [SerializeField] private float speed;
     //direction in which the enemy is moving.
-    Vector3 currentVector;
+    public Vector3 currentVector;
+
+    [SerializeField] float jumpForce;
+    [SerializeField] float gravForce;
+
     int layerMask;
-    string behaviour;
+    [SerializeField] string behaviour;
     [SerializeField] float avoidanceStrength;
     List<Collider> obstaclesList = new List<Collider>();
 
@@ -19,6 +24,7 @@ public class SteeringBehaviours : MonoBehaviour
     void Start()
     {
         StartCoroutine(Tick());
+        StartCoroutine(corJump());
         layerMask =~ LayerMask.GetMask("Enemy");
 
     }
@@ -26,8 +32,46 @@ public class SteeringBehaviours : MonoBehaviour
     void Update()
     {
         Move();
+        Gravity();
         // Debug.Log(behaviour);
+        bool isEmpty = !obstaclesList.Any();
+        if(isEmpty)
+        {
+            for (int i = 0; i < obstaclesList.Count; i++)
+            {
+                Debug.Log(obstaclesList[i]);
+            }
+        }
     }
+
+    IEnumerator corJump()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5);
+            Jump();
+            
+        }
+    }
+
+    void Jump()
+    {
+        Vector3 jumpDir = new Vector3(currentVector.x, jumpForce, currentVector.z);
+        currentVector += jumpDir * Time.fixedDeltaTime;
+        StopCoroutine(corJump());
+        // StartCoroutine(corJump());
+    }
+
+     void Gravity()
+    {
+        Vector3 gVector = new Vector3(0,-gravForce,0);
+        if (transform.position.y > 0.5f)
+        {
+            currentVector -= gVector * Time.fixedDeltaTime;
+        }
+
+    }
+
     Vector3 Seek(Vector3 targetPos)
     {
         //moves towards target
@@ -89,7 +133,7 @@ public class SteeringBehaviours : MonoBehaviour
         {
             temp = obstaclesList[i].transform.position;
         }
-        Vector3 avoidanceVector = transform.position - obstaclesList[1].transform.position; 
+        Vector3 avoidanceVector = transform.position - obstaclesList[0].transform.position; 
 
         Vector3 result = Vector3.Normalize(distanceVector + steeringForce + avoidanceVector);
         return result;
@@ -111,10 +155,10 @@ public class SteeringBehaviours : MonoBehaviour
 
         switch (behaviour)
         {
-            case "avoid":
-            steering = Avoid(target.transform.position);
-            transform.position += (currentVector + steering * speed) * Time.fixedDeltaTime;
-            break;
+            // case "avoid":
+            // steering = Avoid(target.transform.position);
+            // transform.position += (currentVector + steering * speed) * Time.fixedDeltaTime;
+            // break;
 
             default:
             steering = Seek(target.transform.position);
