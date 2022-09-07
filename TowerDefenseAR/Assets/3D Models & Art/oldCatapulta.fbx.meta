@@ -1,35 +1,8 @@
 fileFormatVersion: 2
-guid: cf9b61dac88ab5c4abab3487614ec55a
+guid: 9f1670102f00ca549ad088212baaa739
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable:
-  - first:
-      74: -1595410080774812601
-    second: Base|Base.001Action
-  - first:
-      74: 4750817963062678381
-    second: Base|Base.002Action
-  - first:
-      74: -5791511809027754855
-    second: Base|BaseAction
-  - first:
-      74: 8072998120933668989
-    second: Base.001|Base.001Action
-  - first:
-      74: 1612312793759347907
-    second: Base.001|Base.002Action
-  - first:
-      74: -424768873505060551
-    second: Base.001|BaseAction
-  - first:
-      74: -7599399931944809860
-    second: Base.002|Base.001Action
-  - first:
-      74: 5918414522304825243
-    second: Base.002|Base.002Action
-  - first:
-      74: -3158871743342737990
-    second: Base.002|BaseAction
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 2
