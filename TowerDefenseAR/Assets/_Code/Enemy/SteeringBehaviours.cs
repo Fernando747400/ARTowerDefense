@@ -6,34 +6,30 @@ using System.Linq;
 public class SteeringBehaviours : MonoBehaviour
 {
 
+    //direction in which the enemy is moving.
+
+    [HideInInspector] public Vector3 currentVector;
+
     [SerializeField] GameObject target;
     [SerializeField] private float speed;
-    //direction in which the enemy is moving.
-    public Vector3 currentVector;
-
-    [SerializeField] float jumpForce;
-    [SerializeField] float gravForce;
-
-    int layerMask;
     [SerializeField] string behaviour;
     [SerializeField] float avoidanceStrength;
+    [HideInInspector] public Rigidbody rb;
+    int layerMask;
     List<Collider> obstaclesList = new List<Collider>();
 
-
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
+        Prepare();
         StartCoroutine(Tick());
-        StartCoroutine(corJump());
         layerMask =~ LayerMask.GetMask("Enemy");
 
     }
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         Move();
-        Gravity();
-        // Debug.Log(behaviour);
         bool isEmpty = !obstaclesList.Any();
         if(isEmpty)
         {
@@ -42,34 +38,6 @@ public class SteeringBehaviours : MonoBehaviour
                 Debug.Log(obstaclesList[i]);
             }
         }
-    }
-
-    IEnumerator corJump()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(5);
-            Jump();
-            
-        }
-    }
-
-    void Jump()
-    {
-        Vector3 jumpDir = new Vector3(currentVector.x, jumpForce, currentVector.z);
-        currentVector += jumpDir * Time.fixedDeltaTime;
-        StopCoroutine(corJump());
-        // StartCoroutine(corJump());
-    }
-
-     void Gravity()
-    {
-        Vector3 gVector = new Vector3(0,-gravForce,0);
-        if (transform.position.y > 0.5f)
-        {
-            currentVector -= gVector * Time.fixedDeltaTime;
-        }
-
     }
 
     Vector3 Seek(Vector3 targetPos)
@@ -162,7 +130,8 @@ public class SteeringBehaviours : MonoBehaviour
 
             default:
             steering = Seek(target.transform.position);
-            transform.position += (currentVector + steering * speed) * Time.fixedDeltaTime;
+            Vector3 resultingVector = (currentVector + steering * speed);
+            rb.AddForce (resultingVector);
             break;
         }
         //speed = Arrival(target.transform.position);
@@ -192,4 +161,18 @@ public class SteeringBehaviours : MonoBehaviour
         }
         
     }
+
+    void Prepare()
+    {
+        if (rb == null)
+        {
+            try
+            {
+                rb = gameObject.GetComponent<Rigidbody>();
+            }
+            catch{Debug.LogWarning("Could not find RigidBody");}
+        }
+
+    }
+
 }

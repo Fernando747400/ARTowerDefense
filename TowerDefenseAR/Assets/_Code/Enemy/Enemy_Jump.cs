@@ -2,56 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Jump : MonoBehaviour
+public class Enemy_Jump : SteeringBehaviours
 {
     [SerializeField] float jumpForce;
     [SerializeField] float gravForce;
     SteeringBehaviours behaviours;
+    Coroutine jumpCor;
 
-    private Vector3 dir;
+    //Start is called before the first frame update
+    public override void Start()
+    { 
+        base.Start();
+        StartCoroutine(corJump());
+        //jumpCor = StartCoroutine(corJump());
 
-    // Start is called before the first frame update
-    // void Start()
-    // {
-    //     StartCoroutine(corJump());
-    //     if (behaviours == null)
-    //     {
-    //         try
-    //         {
-    //             behaviours = gameObject.GetComponent<SteeringBehaviours>();
-    //         }
-    //         catch{Debug.LogWarning("Could not find SteeringBehaviours");}
-    //     }
-    // }
+    }
 
-    // // Update is called once per frame
-    // void Update()
-    // {
-    //     Gravity();
+    public override void Update()
+    {
+        base.Update();
+        //Gravity();
+    }
 
-    // }
-
-    // void Jump()
-    // {
-    //     Vector3 jumpDir = new Vector3(dir.x, jumpForce, dir.z);
-    //     dir = jumpDir * Time.fixedDeltaTime;
-    //     Debug.Log("jump done");
-    // }
-    // IEnumerator corJump()
-    // {
-    //     while (true)
-    //     {
-    //         Jump();
-    //         yield return new WaitForSeconds(5);
+    IEnumerator corJump()
+    {
+        while (true)
+        {
+            Jump();
+            Debug.Log("jumped");
+            yield return new WaitForSeconds(2);
             
-    //     }
-    // }
+        }
+    }
+    void Jump()
+    {
+        Vector3 jumpDir = Vector3.up * jumpForce;
+        rb.AddForce(jumpDir);
+
+        // if (transform.position.y == 0.5f)
+        // {    
+        //     currentVector += jumpDir;
+        //     Debug.Log("jumped");
+        //     StopCoroutine(jumpCor);
+        //     // StartCoroutine(corJump());
+        // }
+    }
 
     // void Gravity()
     // {
-    //     Vector3 gVector = new Vector3(0,-gravForce,0);
+    //     Vector3 gVector = Vector3.up * jumpForce;
     //     if (transform.position.y > 0.5f)
     //     {
+    //         Debug.Log("airborne"+gVector * Time.fixedDeltaTime);
     //         transform.position -= gVector * Time.fixedDeltaTime;
     //     }
 
