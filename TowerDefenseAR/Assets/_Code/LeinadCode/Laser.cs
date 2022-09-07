@@ -9,6 +9,8 @@ public class Laser : MonoBehaviour
     public List<GameObject> enemies;
     int index = -1;
     private SphereCollider sphere;
+    public GameObject endLight;
+
 
     void Start()
     {
@@ -31,6 +33,7 @@ public class Laser : MonoBehaviour
                 foreach (var item in enemies)
                 {
                     line.SetPosition(enemies.Count - 1, item.transform.position);
+                    endLight.transform.position = item.transform.position;
                     Debug.Log(enemies.Count - 1, item);
                 }
                 StartCoroutine(UpdateShoot());
@@ -59,7 +62,8 @@ public class Laser : MonoBehaviour
             enemies.Clear();
             index = -1;
             AddLaser();
-            StartCoroutine(CanShoot()); 
+            StartCoroutine(CanShoot());
+            endLight.transform.position = this.transform.position;
         }
     }
     
