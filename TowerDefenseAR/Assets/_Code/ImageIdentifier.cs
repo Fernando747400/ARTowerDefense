@@ -1,8 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -13,6 +12,7 @@ public class ImageIdentifier : MonoBehaviour
     public Text reference; 
     
     private ARTrackedImageManager _TrackerManager;
+    
 
     private void Awake()
     {
@@ -32,7 +32,9 @@ public class ImageIdentifier : MonoBehaviour
     
     private void UpdatedImage(ARTrackedImagesChangedEventArgs args)
     {
-        _gameObjects.Add(GameObject.FindGameObjectWithTag("TrackedImage"));
+         GameObject gameObject =GameObject.FindGameObjectWithTag("TrackedImage") ;
+        _gameObjects.Add(gameObject);
+        reference.text = "Add obj to list" + gameObject.name;
 
         foreach (var item in args.added)
         {
@@ -44,17 +46,41 @@ public class ImageIdentifier : MonoBehaviour
                     {
                         if (obj.name == "Tower")
                         {
+                            reference.text =" Mover Game Objetc = " +obj.name;
+                            PositionsController pos = obj.GetComponent<PositionsController>();
+                            pos.RePostionGO(item);
+                        }
+                    }
+                    break;
+             
+                case "Laser":
+                    foreach (var obj in _gameObjects)
+                    {
+                        if (obj.name == "Laser")
+                        {
+                            reference.text = obj.name;
+
                             PositionsController pos = obj.GetComponent<PositionsController>();
                             pos.RePostionGO(item);
                         }
                     }
                     
-                break;
-             // case "imagen 2":
-            // animalPrefab = spawnedPrefabs["imagen 2"];
-            // animalPrefab.transform.position = trackedImage.transform.position;
-            // animalPrefab.SetActive(true);
-            // break;
+                    break;
+                
+                case "Center":
+                    foreach (var obj in _gameObjects)
+                    {
+                        if (obj.name == "Center")
+                        {
+                            reference.text = obj.name;
+                            PositionsController pos = obj.GetComponent<PositionsController>();
+                            pos.RePostionGO(item);
+                        }
+                    }
+                    
+                    break;
+
+                
             }
              
         }
