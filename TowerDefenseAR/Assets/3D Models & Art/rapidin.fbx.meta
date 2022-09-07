@@ -1,62 +1,11 @@
 fileFormatVersion: 2
-guid: cf9b61dac88ab5c4abab3487614ec55a
+guid: 59f8852035e02c54b9bc678389857182
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
-      74: -1595410080774812601
-    second: Base|Base.001Action
-  - first:
-      74: 4750817963062678381
-    second: Base|Base.002Action
-  - first:
-      74: -5791511809027754855
-    second: Base|BaseAction
-  - first:
-      74: 8072998120933668989
-    second: Base.001|Base.001Action
-  - first:
-      74: 1612312793759347907
-    second: Base.001|Base.002Action
-  - first:
-      74: -424768873505060551
-    second: Base.001|BaseAction
-  - first:
-      74: -7599399931944809860
-    second: Base.002|Base.001Action
-  - first:
-      74: 5918414522304825243
-    second: Base.002|Base.002Action
-  - first:
-      74: -3158871743342737990
-    second: Base.002|BaseAction
-  - first:
-      74: 3429329731103947283
-    second: Base|Base.001Action.001
-  - first:
-      74: 980994320656553069
-    second: Base|Base.001Action.002
-  - first:
-      74: 7354516945775968099
-    second: Base|Base.002Action.001
-  - first:
-      74: -8817714485739499976
-    second: Base.001|Base.001Action.001
-  - first:
-      74: -5004085902253984914
-    second: Base.001|Base.001Action.002
-  - first:
-      74: 6967536216638485649
-    second: Base.001|Base.002Action.001
-  - first:
-      74: 4081932472967996590
-    second: Base.002|Base.001Action.001
-  - first:
-      74: -1280309016619713170
-    second: Base.002|Base.001Action.002
-  - first:
-      74: -4210046276465011815
-    second: Base.002|Base.002Action.001
+      74: 4781951162920444690
+    second: Armature|ArmatureAction
   externalObjects: {}
   materials:
     materialImportMode: 2
