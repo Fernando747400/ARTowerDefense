@@ -37,7 +37,7 @@ public class ImageIdentifier : MonoBehaviour
         _gameObjects.Add(gameObject);
         // reference.text = "Add obj to list" + gameObject.name;
 
-        foreach (ARTrackedImage trackedImage in args.added)
+        foreach (ARTrackedImage trackedImage in args.updated)
         {
             switch (trackedImage.referenceImage.name)
             {
@@ -72,9 +72,9 @@ public class ImageIdentifier : MonoBehaviour
                     {
                         if (obj.name == "Center")
                         {
-                            // reference.text = " Mover Game Objetc = " +obj.name + " pos= "+ trackedImage.transform.position;
+                            reference.text = " Mover Game Objetc = " +obj.name + " pos= "+ trackedImage.transform.position;
                             PositionsController pos = obj.GetComponent<PositionsController>();
-                            pos.RePostionGO(trackedImage, reference);
+                            //pos.RePostionGO(trackedImage, reference);
                         }
                     }
                     
