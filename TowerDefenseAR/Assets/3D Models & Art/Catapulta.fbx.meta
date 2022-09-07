@@ -30,6 +30,33 @@ ModelImporter:
   - first:
       74: -3158871743342737990
     second: Base.002|BaseAction
+  - first:
+      74: 3429329731103947283
+    second: Base|Base.001Action.001
+  - first:
+      74: 980994320656553069
+    second: Base|Base.001Action.002
+  - first:
+      74: 7354516945775968099
+    second: Base|Base.002Action.001
+  - first:
+      74: -8817714485739499976
+    second: Base.001|Base.001Action.001
+  - first:
+      74: -5004085902253984914
+    second: Base.001|Base.001Action.002
+  - first:
+      74: 6967536216638485649
+    second: Base.001|Base.002Action.001
+  - first:
+      74: 4081932472967996590
+    second: Base.002|Base.001Action.001
+  - first:
+      74: -1280309016619713170
+    second: Base.002|Base.001Action.002
+  - first:
+      74: -4210046276465011815
+    second: Base.002|Base.002Action.001
   externalObjects: {}
   materials:
     materialImportMode: 2
