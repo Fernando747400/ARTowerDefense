@@ -9,13 +9,14 @@ public class PlaneSpawner : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private GameObject _prefabToSpawn;
 
-    private List<GameObject> spawnedObjects = new List<GameObject>();
+    private List<GameObject> spawnedObjects;
     private ARRaycastManager raycastManager;
-    List<ARRaycastHit> rayHits = new List<ARRaycastHit>();
-
+    List<ARRaycastHit> rayHits;
+    private BoundedPlane _boundedPlane;
     private void Start()
     {
         raycastManager = GetComponent<ARRaycastManager>();
+       
     }
 
     private void Update()
