@@ -19,7 +19,7 @@ public class FollowTarget : MonoBehaviour
     public void Start()
     {
         if (_looker == null) _looker = this.gameObject;
-        if (_target == null) _target = Instantiate(GameObject.CreatePrimitive(PrimitiveType.Cube), Vector3.zero, Quaternion.identity);
+        if (_target == null) Debug.Log("No target set");
     }
 
     public void Update()
