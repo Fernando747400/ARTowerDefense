@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,11 @@ public class Spawner_UI_Controller : MonoBehaviour
     [SerializeField] private GameObject centerPrefab;
     [SerializeField] private GameObject laserPrefab;
 
+    
     [SerializeField] private Text textNumInstances;
+    [SerializeField] private Text textPlanes;
+
+    public Action<bool> OnActivatePlaneGenerator;
     
 
     public void InstanceTower()
@@ -39,5 +44,16 @@ public class Spawner_UI_Controller : MonoBehaviour
     {
         Instantiate(laserPrefab, Vector3.zero, Quaternion.identity);
         
+    }
+
+    public void GeneratePlane(bool active)
+    {
+        Debug.Log("Generate Plane");
+        if (active)
+        {
+            active = !active;
+            // textPlanes.text = ""
+        }
+        OnActivatePlaneGenerator?.Invoke(active);
     }
 }
