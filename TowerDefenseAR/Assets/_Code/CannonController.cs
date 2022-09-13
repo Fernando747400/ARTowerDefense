@@ -13,6 +13,10 @@ public class CannonController : MonoBehaviour
     [SerializeField] private GameObject _BulletPrefab;
     [SerializeField] private GameObject _BulletSpawner;
 
+    [Header("Follow Target")]
+    [SerializeField] private FollowTarget _followYaw;
+    [SerializeField] private FollowTarget _followPitch;
+
     [Header("Settings")]
     [SerializeField] private float _SpeedDamp;
     [SerializeField] private float _SpeedBullet;
@@ -22,52 +26,59 @@ public class CannonController : MonoBehaviour
 
     public GameObject Enemy;
 
-    
+    private void Start()
+    {
+        _followPitch.Target = Enemy;
+        _followYaw.Target = Enemy;
+    }
+
 
     private void Update()
     {
-        LookAt(_YawPoint, Enemy,'y');
-        LookAt(_PitchPoint, Enemy, 'a');
+        _YawPoint.transform.rotation = _followYaw.FinalRotation;
+        _PitchPoint.transform.rotation = _followPitch.FinalRotation;
+        //LookAt(_YawPoint, Enemy,'y');
+        //LookAt(_PitchPoint, Enemy, 'a');
         if (Input.GetKeyDown(KeyCode.O)) Shoot();
     }
 
-    private void LookAt(GameObject looker, GameObject target, char axis)
-    {
-        Vector3 targetVector = target.transform.position - looker.transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(targetVector);
-        Vector3 rotation = lookRotation.eulerAngles;
-        switch (axis)
-        {
-            case 'x':
-                rotation.y = 0;
-                rotation.z = 0;
-                break;
+    //private void LookAt(GameObject looker, GameObject target, char axis)
+    //{
+    //    Vector3 targetVector = target.transform.position - looker.transform.position;
+    //    Quaternion lookRotation = Quaternion.LookRotation(targetVector);
+    //    Vector3 rotation = lookRotation.eulerAngles;
+    //    switch (axis)
+    //    {
+    //        case 'x':
+    //            rotation.y = 0;
+    //            rotation.z = 0;
+    //            break;
 
-            case 'y':
-                rotation.x = 0;
-                rotation.z = 0;
-                break;
+    //        case 'y':
+    //            rotation.x = 0;
+    //            rotation.z = 0;
+    //            break;
 
-            case 'z':
-                rotation.x = 0;
-                rotation.y = 0;
-                break;
+    //        case 'z':
+    //            rotation.x = 0;
+    //            rotation.y = 0;
+    //            break;
 
-            case 'a':
-                float angle = 0f;
-                if (_isMortar) angle = (float)CalculateFullAngle();
-                else angle = (float)CalculateAngle();
-                if (angle > 0) rotation.x = -angle;
-                else rotation.x = angle;
-                break;
+    //        case 'a':
+    //            float angle = 0f;
+    //            if (_isMortar) angle = (float)CalculateFullAngle();
+    //            else angle = (float)CalculateAngle();
+    //            if (angle > 0) rotation.x = -angle;
+    //            else rotation.x = angle;
+    //            break;
 
-            default:
-                Debug.Log("Incorrect axis or casing typed");
-                rotation = Vector3.zero;
-                break;
-        }
-        looker.transform.rotation = Quaternion.Euler(rotation);
-    }
+    //        default:
+    //            Debug.Log("Incorrect axis or casing typed");
+    //            rotation = Vector3.zero;
+    //            break;
+    //    }
+    //    looker.transform.rotation = Quaternion.Euler(rotation);
+    //}
 
     private void Shoot()
     {
