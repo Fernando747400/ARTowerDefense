@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Transactions;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CannonController : MonoBehaviour
@@ -37,48 +38,18 @@ public class CannonController : MonoBehaviour
     {
         _YawPoint.transform.rotation = _followYaw.FinalRotation;
         _PitchPoint.transform.rotation = _followPitch.FinalRotation;
-        //LookAt(_YawPoint, Enemy,'y');
-        //LookAt(_PitchPoint, Enemy, 'a');
+        RotateSpecial();
         if (Input.GetKeyDown(KeyCode.O)) Shoot();
     }
 
-    //private void LookAt(GameObject looker, GameObject target, char axis)
-    //{
-    //    Vector3 targetVector = target.transform.position - looker.transform.position;
-    //    Quaternion lookRotation = Quaternion.LookRotation(targetVector);
-    //    Vector3 rotation = lookRotation.eulerAngles;
-    //    switch (axis)
-    //    {
-    //        case 'x':
-    //            rotation.y = 0;
-    //            rotation.z = 0;
-    //            break;
-
-    //        case 'y':
-    //            rotation.x = 0;
-    //            rotation.z = 0;
-    //            break;
-
-    //        case 'z':
-    //            rotation.x = 0;
-    //            rotation.y = 0;
-    //            break;
-
-    //        case 'a':
-    //            float angle = 0f;
-    //            if (_isMortar) angle = (float)CalculateFullAngle();
-    //            else angle = (float)CalculateAngle();
-    //            if (angle > 0) rotation.x = -angle;
-    //            else rotation.x = angle;
-    //            break;
-
-    //        default:
-    //            Debug.Log("Incorrect axis or casing typed");
-    //            rotation = Vector3.zero;
-    //            break;
-    //    }
-    //    looker.transform.rotation = Quaternion.Euler(rotation);
-    //}
+    private void RotateSpecial()
+    {
+        Vector3 temporal;
+        temporal.x = _followPitch.FinalRotation.x;
+        temporal.y = _followPitch.FinalRotation.y;
+        temporal.z = _followPitch.FinalRotation.z;
+        _PitchPoint.transform.rotation = Quaternion.Euler(ChangeAngle(temporal));
+    }
 
     private void Shoot()
     {
@@ -124,6 +95,17 @@ public class CannonController : MonoBehaviour
         fTime /= 9.8;
         Debug.Log("Flight time " +fTime);
         return fTime;
+    }
+
+    private Vector3 ChangeAngle(Vector3 rotation)
+    {
+        float angle = 0f;
+        if (_isMortar) angle = (float)CalculateFullAngle();
+        else angle = (float)CalculateAngle();
+        if (angle > 0) rotation.x = -angle;
+        else rotation.x = angle;
+
+        return rotation;
     }
 
     //TODO https://www.forrestthewoods.com/blog/solving_ballistic_trajectories/
