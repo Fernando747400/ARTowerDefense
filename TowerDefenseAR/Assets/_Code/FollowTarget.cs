@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class FollowTarget : MonoBehaviour
@@ -10,10 +6,15 @@ public class FollowTarget : MonoBehaviour
     [SerializeField] private GameObject _looker;
     [SerializeField] private GameObject _target;
 
-    [Header("Dependencies")]
+    [Header("Settings")]
     [SerializeField] private bool _ignoreX;
     [SerializeField] private bool _ignoreY;
     [SerializeField] private bool _ignoreZ;
+
+    private Quaternion _finalRotation;
+
+    public Quaternion FinalRotation { get => _finalRotation; }
+    public GameObject Target { get => _target; set => _target = value; }
 
     public void Start()
     {
@@ -23,16 +24,24 @@ public class FollowTarget : MonoBehaviour
 
     public void Update()
     {
-        
+        _finalRotation = LookAt(_looker.transform, _target.transform);
     }
 
-    private void LookAt()
+    private Quaternion LookAt(Transform target, Transform looker)
     {
+        Vector3 targetVector = target.transform.position - looker.transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(targetVector);
+        Vector3 rotation = lookRotation.eulerAngles;
 
+        return Quaternion.Euler(IgnoreAxis(rotation));
     }
 
-    private void IgnoreAxis(Vector3 rotationValues)
+    private Vector3 IgnoreAxis(Vector3 rotation)
     {
+        if (_ignoreX) rotation.x = 0f;
+        if (_ignoreY) rotation.y = 0f;
+        if (_ignoreZ) rotation.z = 0f;
 
+        return rotation;
     }
 }
