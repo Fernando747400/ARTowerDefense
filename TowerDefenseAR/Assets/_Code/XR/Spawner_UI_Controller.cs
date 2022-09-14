@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Spawner_UI_Controller : MonoBehaviour
 {
@@ -14,9 +15,8 @@ public class Spawner_UI_Controller : MonoBehaviour
 
     
     [SerializeField] private Text textNumInstances;
-    [SerializeField] private Text textPlanes;
 
-    public Action<bool> OnActivatePlaneGenerator;
+    public UnityEvent<bool> ActivatePlaneGenerator;
     
 
     public void InstanceTower()
@@ -48,12 +48,6 @@ public class Spawner_UI_Controller : MonoBehaviour
 
     public void GeneratePlane(bool active)
     {
-        Debug.Log("Generate Plane");
-        if (active)
-        {
-            active = !active;
-            // textPlanes.text = ""
-        }
-        OnActivatePlaneGenerator?.Invoke(active);
+        ActivatePlaneGenerator?.Invoke(active);
     }
 }
