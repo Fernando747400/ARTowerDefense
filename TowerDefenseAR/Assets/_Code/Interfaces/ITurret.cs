@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _Code.XR;
 using UnityEngine;
 
 public interface ITurret 
@@ -28,4 +29,8 @@ public interface ITurret
         set;
     }
 
+    public TorretTypes myType
+    {
+        get;
+    }
 }

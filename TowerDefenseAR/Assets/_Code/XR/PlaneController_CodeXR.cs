@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.UI;
 
-public class PlaneController : MonoBehaviour
+public class PlaneController_CodeXR : MonoBehaviour
 {
     
     public List<ARPlane> arPlanes;
@@ -88,7 +88,7 @@ public class PlaneController : MonoBehaviour
         }
 
         planeManager.enabled = active;
-        // textPlanes.text = "Plane = " + planeManager.enabled;
+        textPlanes.text = "Plane = " + planeManager.enabled;
 
     }
     

@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class Spawner_UI_Controller : MonoBehaviour
+public class SpawnerUI_CodeXR : MonoBehaviour
 {
     // int numInstancesCenter = 0;
     
