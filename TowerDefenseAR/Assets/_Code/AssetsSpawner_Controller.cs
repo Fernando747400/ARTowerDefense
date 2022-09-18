@@ -1,22 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.ARFoundation;
 
-public class PlaneSpawner : MonoBehaviour
+public class AssetsSpawner_Controller : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] private GameObject _prefabToSpawn;
 
     private List<GameObject> spawnedObjects;
-    private ARRaycastManager raycastManager;
+    public ARRaycastManager raycastManager;
     List<ARRaycastHit> rayHits;
     private BoundedPlane _boundedPlane;
     private void Start()
     {
-        raycastManager = GetComponent<ARRaycastManager>();
+        // raycastManager = GetComponent<ARRaycastManager>();
        
+    }
+
+    private void OnEnable()
+    {
+        Spawner_UI_Controller spawnerUIController = GetComponent<Spawner_UI_Controller>();
+        spawnerUIController.OnChangePrefab += HandleAssetPrefab;
+    }
+
+    private void HandleAssetPrefab(GameObject prefab)
+    {
+        _prefabToSpawn = prefab;
     }
 
     private void Update()

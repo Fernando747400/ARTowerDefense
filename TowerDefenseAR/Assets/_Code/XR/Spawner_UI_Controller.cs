@@ -7,47 +7,21 @@ using UnityEngine.Events;
 
 public class Spawner_UI_Controller : MonoBehaviour
 {
-    int numInstancesCenter = 0;
-    
-    [SerializeField] private GameObject towerPrefab;
-    [SerializeField] private GameObject centerPrefab;
-    [SerializeField] private GameObject laserPrefab;
-
+    // int numInstancesCenter = 0;
     
     [SerializeField] private Text textNumInstances;
-
-    public UnityEvent<bool> ActivatePlaneGenerator;
+    private UnityEvent<bool> ActivatePlaneGenerator;
+    public Action<GameObject> OnChangePrefab;
     
-
-    public void InstanceTower()
+    
+    public void SelectPrefab(GameObject prefab)
     {
-        Instantiate(towerPrefab, Vector3.zero, Quaternion.identity);
+        OnChangePrefab?.Invoke(prefab);
     }
     
-    public void InstanceCenter()
-    {
-        if (numInstancesCenter < 1)
-        {
-            GameObject center =  Instantiate(centerPrefab, Vector3.zero, Quaternion.identity);
-            center.gameObject.name = "Center";
-            numInstancesCenter++;
-            textNumInstances.text = numInstancesCenter.ToString();
-        }
-        else
-        {
-            textNumInstances.color = Color.red;
-        }
-        
-
-    }
-    public void InstanceLaser()
-    {
-        Instantiate(laserPrefab, Vector3.zero, Quaternion.identity);
-        
-    }
-
     public void GeneratePlane(bool active)
     {
         ActivatePlaneGenerator?.Invoke(active);
     }
+    
 }
