@@ -29,7 +29,7 @@ public interface ITurret
         set;
     }
 
-    public TorretTypes myType
+    public TurretTypes myType
     {
         get;
     }

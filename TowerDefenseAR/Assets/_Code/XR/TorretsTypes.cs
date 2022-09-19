@@ -1,9 +1,10 @@
 namespace _Code.XR
 {
-    public enum TorretTypes
+    public enum TurretTypes
     {
-        Center,
-        Laser,
-        Tower
+        None, //0
+        Center,//1
+        Laser,//2
+        Tower//3
     }
 }

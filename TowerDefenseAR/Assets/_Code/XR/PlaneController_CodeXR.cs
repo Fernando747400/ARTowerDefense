@@ -12,7 +12,7 @@ public class PlaneController_CodeXR : MonoBehaviour
     
     public List<ARPlane> arPlanes;
     public ARPlaneManager planeManager;
-    public Text reference; 
+    // public Text reference; 
     [SerializeField] private Text textPlanes;
 
     private void Start()
@@ -22,8 +22,8 @@ public class PlaneController_CodeXR : MonoBehaviour
 
     private void Update()
     {
-        if(arPlanes!=null)
-         reference.text = "planes arPlanes = " + arPlanes.Count;
+        // if(arPlanes!=null)
+         // reference.text = "planes arPlanes = " + arPlanes.Count;
     }
 
     private void OnEnable()

@@ -3,51 +3,57 @@
     "m_SelectedPackage": {
         "deviceId": "R5CT60XKTWL",
         "name": "com.F747.TowerDefenseAR",
-        "processId": 7926,
+        "processId": 1746,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "R5CT60XKTWL",
+            "name": "com.F747.TowerDefenseAR",
+            "processId": 5651,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CT60XKTWL",
+            "name": "com.instagram.android",
+            "processId": 31393,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT60XKTWL",
+            "name": "com.F747.TowerDefenseAR",
+            "processId": 10331,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CT60XKTWL",
+            "name": "com.facebook.katana",
+            "processId": 31489,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT60XKTWL",
+            "name": "com.F747.TowerDefenseAR",
+            "processId": 19702,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CT60XKTWL",
             "name": "com.sec.android.app.launcher",
-            "processId": 2609,
+            "processId": 3061,
             "exited": false
         },
         {
             "deviceId": "R5CT60XKTWL",
             "name": "com.F747.TowerDefenseAR",
-            "processId": 11790,
+            "processId": 25100,
             "exited": true
         },
         {
             "deviceId": "R5CT60XKTWL",
             "name": "com.F747.TowerDefenseAR",
-            "processId": 15220,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CT60XKTWL",
-            "name": "com.F747.TowerDefenseAR",
-            "processId": 19002,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CT60XKTWL",
-            "name": "com.F747.TowerDefenseAR",
-            "processId": 23356,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CT60XKTWL",
-            "name": "com.F747.TowerDefenseAR",
-            "processId": 28938,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CT60XKTWL",
-            "name": "com.F747.TowerDefenseAR",
-            "processId": 7926,
+            "processId": 1746,
             "exited": false
         }
     ],
