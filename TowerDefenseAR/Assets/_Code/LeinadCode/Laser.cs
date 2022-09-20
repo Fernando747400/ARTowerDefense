@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
+    [Header("Dependencies")]
     public int maxBounceEnemy;
-    private LineRenderer line;
     public List<GameObject> enemies;
-    int index = -1;
-    private SphereCollider sphere;
+    public GameObject rPoint;
 
+    [Header("Follow")]
+    [SerializeField] private FollowTarget followTarget;
+    private LineRenderer line; 
+    private int index = -1;
+    private SphereCollider sphere;
+    
     void Start()
     {
         sphere = GetComponent<SphereCollider>();
@@ -17,25 +22,29 @@ public class Laser : MonoBehaviour
         AddLaser();
     }
 
+    private void Update()
+    {
+        rPoint.transform.rotation = followTarget.FinalRotation;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag != "Enemy") return; 
+        
+        enemies.Capacity = maxBounceEnemy;
+        index = index + 1;
+
+        if(index > enemies.Capacity) return;
+
+        enemies.Insert(index, other.gameObject);
+        line.positionCount = enemies.Count;
+        foreach (var item in enemies)
         {
-            enemies.Capacity = maxBounceEnemy;
-            Debug.Log("Colisiona");
-            index = index + 1;
-            if(index < enemies.Capacity)
-            {
-                enemies.Insert(index, other.gameObject);
-                line.positionCount = enemies.Count;
-                foreach (var item in enemies)
-                {
-                    line.SetPosition(enemies.Count - 1, item.transform.position);
-                    Debug.Log(enemies.Count - 1, item);
-                }
-                StartCoroutine(UpdateShoot());
-            }
+            line.SetPosition(enemies.Count - 1, item.transform.position);
+            Debug.Log(enemies.Count - 1, item);
+            followTarget.Target = enemies[1];
         }
+        StartCoroutine(UpdateShoot());
     }
 
     void AddLaser()
@@ -59,7 +68,7 @@ public class Laser : MonoBehaviour
             enemies.Clear();
             index = -1;
             AddLaser();
-            StartCoroutine(CanShoot()); 
+            StartCoroutine(CanShoot());
         }
     }
     

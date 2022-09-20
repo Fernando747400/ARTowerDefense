@@ -1,151 +1,93 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SteeringBehaviours : MonoBehaviour
 {
-
-    [SerializeField] GameObject target;
-    [SerializeField] private float speed;
-    //direction in which the enemy is moving.
-    Vector3 currentVector;
-    int layerMask;
-    string behaviour;
-    [SerializeField] float avoidanceStrength;
-    List<Collider> obstaclesList = new List<Collider>();
-
-
-    // Start is called before the first frame update
-    void Start()
+    public float speed;
+    [HideInInspector]public Vector3 currentVector;
+    public GameObject target;
+    
+    public Vector3 Seek(Vector3 targetPos)
     {
-        StartCoroutine(Tick());
-        layerMask =~ LayerMask.GetMask("Enemy");
-
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        Move();
-        // Debug.Log(behaviour);
-    }
-    Vector3 Seek(Vector3 targetPos)
-    {
-        //moves towards target
         Vector3 distanceVector = targetPos - transform.position;
         Vector3 steeringForce = distanceVector + currentVector;
         Vector3 result = Vector3.Normalize(distanceVector + steeringForce);
         return result;
     }
-
-    Vector3 Flee(Vector3 targetPos)
+    public Vector3 Flee(Vector3 targetPos)
     {
-        //moves away from target
-        Vector3 distanceVector = transform.position - targetPos;
-        Vector3 steeringForce = distanceVector + currentVector;
-        Vector3 result = Vector3.Normalize(distanceVector + steeringForce);
+        Vector3 result = Seek(targetPos) * -1;
         return result;
-
     }
-
-    float Arrival(Vector3 targetPos)
+    public float Arrival(Vector3 targetPos)
     {
-        //seeks target and chages velocity depending on distance
         float result;
         Vector3 distanceVector = targetPos - transform.position;
         switch (distanceVector.magnitude)
         {
-            case > 10f:
+            case float n when(n > 30f):
                 result = 0f;
                 break;
 
-            // case < 10f:
-            //     result = 1f;
-            //     break;
-            // case < 5f:
-            //     result = .6f;
-            //     break;
-            // case < .1f:
-            //     result = 0f;
-            //     break;
+            case float n when(n < 30f && n > 20f):
+                 result = 3f;
+                 break;
 
-            default:
-                result = 1f;
-                break; 
-
-        }
-        Debug.Log(result);
-        return result;
-    }
-
-    Vector3 Avoid(Vector3 targetPos)
-    {
-        //seeks target while avoiding obstacles
-        Vector3 distanceVector = targetPos - transform.position;
-        Vector3 steeringForce = distanceVector + currentVector;
-        Vector3 temp;;
-        
-
-        for (int i = 0; i < obstaclesList.Count; i++)
-        {
-            temp = obstaclesList[i].transform.position;
-        }
-        Vector3 avoidanceVector = transform.position - obstaclesList[1].transform.position; 
-
-        Vector3 result = Vector3.Normalize(distanceVector + steeringForce + avoidanceVector);
-        return result;
-
-    }
-
-    IEnumerator Tick()
-    {
-        while(true)
-        {
-            ReCast();
-            yield return new WaitForSeconds(.33f);
-        }
-    }
-    
-    void Move()
-    {
-        Vector3 steering;
-
-        switch (behaviour)
-        {
-            case "avoid":
-            steering = Avoid(target.transform.position);
-            transform.position += (currentVector + steering * speed) * Time.fixedDeltaTime;
-            break;
-
-            default:
-            steering = Seek(target.transform.position);
-            transform.position += (currentVector + steering * speed) * Time.fixedDeltaTime;
-            break;
-        }
-        //speed = Arrival(target.transform.position);
-
-    }
-    void ReCast()
-    {
-        Collider[] obstacles = Physics.OverlapSphere(transform.position,2,layerMask);
-
-        if(obstacles.Length != 0)
-        {
-            behaviour = "avoid";
-
-        }else
-        {
-            behaviour = "seek";
-        }
-        for (int i = 0; i < obstacles.Length; i++)
-        {
-            if (! obstaclesList.Contains(obstacles[i]))
-            {
-                obstaclesList.Add(obstacles[i]);
-                // Debug.Log("Added " + obstacles[i].name + " to list.");
-                
-            }
+            case float n when (n < 20 && n > 10):
+                result = 2f;
+                break;
             
+            case float n when (n < 10 && n > 0):
+                result = .33f;
+                break;
+
+            default:
+                result = 0f;
+                break; 
         }
-        
+        return result;
     }
+    public Vector3 AvoidObstacles(Vector3 targetPos)
+    {
+        
+        Vector3 result = Seek(targetPos);
+        return result;
+    }
+
+    // public Vector3 pursuit(Vector3 targePos)
+    // {
+    //     
+    //     
+    // }
+    
+    // Wandering behaviour shelved for now
+    // public Vector3 Wander(Vector3 targetPos)
+    // {
+    //     Vector3 distanceVector = targetPos - transform.position;
+    //     Vector3 steeringForce = distanceVector + currentVector;
+    //
+    //     Vector3 result = Vector3.Normalize(distanceVector + steeringForce);
+    //     return result;
+    //
+    //
+    // }
+    // public void RandomizeTarget()
+    // {
+    //     for (int i = 0; i < 2; i++)
+    //     {
+    //         float r = Random.Range(10,40);
+    //         Vector3 randomTarget = new Vector3 (r,r,r);
+    //         Debug.Log("Randomized to: " + randomTarget.x +randomTarget.y + randomTarget.z);
+    //     }
+    //
+    // }
+    //
+    // public IEnumerator CorRandomize()
+    // {
+    //     while (true)
+    //     {
+    //         RandomizeTarget();
+    //         yield return new WaitForSeconds(2);
+    //     }
+    // }
+    
 }
