@@ -7,26 +7,23 @@ using UnityEngine;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.ARFoundation;
 
-public class RaycastSpawner_CodeXR : MonoBehaviour
+public class SpawnerController_CodeXR : MonoBehaviour
 {
     [Header("Dependencies")]
-    [SerializeField] private GameObject _prefabToSpawn;
-    [SerializeField] private Text textNumInstances;
-
-    private List<GameObject> centerList;
-    private List<GameObject> turretList;
+    [SerializeField] private GameObject prefabToSpawn;
     public ARRaycastManager raycastManager;
-    List<ARRaycastHit> rayHits;
+    
+    private List<GameObject> _centerList;
+    private List<GameObject> _turretList;
+    private List<ARRaycastHit> _rayHits;
     private BoundedPlane _boundedPlane;
-
-  
-    private TurretTypes currentType;
+    private TurretTypes _currentType;
     
     private void Start()
     {
-        rayHits = new List<ARRaycastHit>();
-        centerList = new List<GameObject>();
-        turretList = new List<GameObject>();
+        _rayHits = new List<ARRaycastHit>();
+        _centerList = new List<GameObject>();
+        _turretList = new List<GameObject>();
     }
 
     private void OnEnable()
@@ -34,11 +31,12 @@ public class RaycastSpawner_CodeXR : MonoBehaviour
         SpawnerUI_CodeXR spawnerUICodeXR = GetComponent<SpawnerUI_CodeXR>();
         spawnerUICodeXR.OnChangePrefab += HandleAssetPrefab;
         spawnerUICodeXR.OnSelectType += UpdateCurrentType;
+        spawnerUICodeXR.OnResetPrefabs += ResetInstancesPrefabs;
     }
 
     private void HandleAssetPrefab(GameObject prefab)
     {
-        _prefabToSpawn = prefab;
+        prefabToSpawn = prefab;
         
     }
 
@@ -48,9 +46,9 @@ public class RaycastSpawner_CodeXR : MonoBehaviour
         {
             if (raycastManager != null)
             {
-                if(raycastManager.Raycast(touchPosition, rayHits, TrackableType.PlaneWithinPolygon))
+                if(raycastManager.Raycast(touchPosition, _rayHits, TrackableType.PlaneWithinPolygon))
                 {
-                    var hit = rayHits[0];
+                    var hit = _rayHits[0];
                     HandleRaycast(hit);
                 }
             }
@@ -85,13 +83,13 @@ public class RaycastSpawner_CodeXR : MonoBehaviour
         int maxPrefabs = 4;
         int centerPrefab = 1;
         
-        switch (currentType)
+        switch (_currentType)
         {
             case TurretTypes.Center:
-                if (centerList.Count >= centerPrefab) return false;
+                if (_centerList.Count >= centerPrefab) return false;
                 break;
             case TurretTypes.Laser or TurretTypes.Tower:
-                if (turretList.Count >= maxPrefabs) return false;
+                if (_turretList.Count >= maxPrefabs) return false;
                 break;
             
         }
@@ -100,24 +98,40 @@ public class RaycastSpawner_CodeXR : MonoBehaviour
 
     public void UpdateCurrentType(int type)
     {
-        currentType = (TurretTypes)type;
+        _currentType = (TurretTypes)type;
     }
 
     public void InstancePrefab(ARRaycastHit hit)
     {
+        int costTurret = CurrencyManager_CodeStore.Instance.turretsCost;
         if (CanInstancePrefab())
         {
-            switch (currentType)
+            switch (_currentType)
             {
                 case TurretTypes.Center:
-                    centerList.Add(Instantiate(_prefabToSpawn, hit.pose.position, hit.pose.rotation));
+                    _centerList.Add(Instantiate(prefabToSpawn, hit.pose.position, hit.pose.rotation));
                     break;
                 case TurretTypes.Laser or TurretTypes.Tower:
-                    turretList.Add(Instantiate(_prefabToSpawn, hit.pose.position, hit.pose.rotation));
+                    if (CurrencyManager_CodeStore.Instance.CanRemoveCoins(costTurret))
+                    {
+                        _turretList.Add(Instantiate(prefabToSpawn, hit.pose.position, hit.pose.rotation));
+                    }
                     break;
             }
-
         }
-
     }
+
+    private void ResetInstancesPrefabs()
+    {
+        GameObject[] prefabs = GameObject.FindGameObjectsWithTag("TrackedImage");
+
+        for (int i = 0; i < prefabs.Length; i++)
+        {
+            Destroy(prefabs[i]);
+        }
+        _centerList = new List<GameObject>();
+        _turretList = new List<GameObject>();
+    }
+    
+    
 }
