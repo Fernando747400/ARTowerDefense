@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 617073906}
   - component: {fileID: 617073907}
   - component: {fileID: 617073908}
+  - component: {fileID: 617073909}
   m_Layer: 0
   m_Name: GameplayControllers
   m_TagString: Untagged
@@ -515,6 +516,28 @@ MonoBehaviour:
   numberOfPools: 4
   radius: 1
   angleToSpawn: 90
+  poolersGO: []
+  poolers: []
+  spawnersGO: []
+  spawners: []
+  enemyPoolingManager: {fileID: 617073909}
+--- !u!114 &617073909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617073904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a8c3fe8f236a14aa9440412ebe4fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawners: []
+  TankPrefab: {fileID: 7570577391167754936, guid: dc61de3adf9af9d438188be37d8f2011, type: 3}
+  JumpingPrefab: {fileID: 4237410778480927114, guid: fc74f1dc250e5ed4da65c79394a75dfa, type: 3}
+  enemiesToSpawn: 20
+  BeginGame: 0
 --- !u!1 &646013221
 GameObject:
   m_ObjectHideFlags: 0

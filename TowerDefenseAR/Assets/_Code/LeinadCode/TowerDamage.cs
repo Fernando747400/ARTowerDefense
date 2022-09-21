@@ -20,7 +20,7 @@ public class TowerDamage : MonoBehaviour
             CheckHealt();
             Debug.Log("Colisionando");
             StartCoroutine(GetDamage());
-            Destroy(other.gameObject);
+            other.GetComponent<DummyEnemy>().RestartPool();
         }
     }
 

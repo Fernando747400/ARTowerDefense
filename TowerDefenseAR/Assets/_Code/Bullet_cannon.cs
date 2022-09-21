@@ -26,7 +26,7 @@ public class Bullet_cannon : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Floor"))
         {
             HitEnemies();
         }
@@ -49,7 +49,7 @@ public class Bullet_cannon : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (this.transform.position.y <= initialPos.y) HitEnemies();
+        
         timer += Time.deltaTime;
 
         if(timer >= 15f)

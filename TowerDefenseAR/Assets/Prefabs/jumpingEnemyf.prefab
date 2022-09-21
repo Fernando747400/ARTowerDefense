@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 7179519026735171080}
   m_Layer: 8
   m_Name: jumpingEnemyf
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,12 +93,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331ed3a8c7761564baa2368dd15f5614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 1.5
   currentVector: {x: 0, y: 0, z: 0}
-  maxSpeed: 2
+  maxSpeed: 1
   rb: {fileID: 0}
-  jumpForce: 150
-  jumpDelay: 2
+  jumpForce: 100
+  jumpDelay: 1.5
 --- !u!54 &4237410778480927111
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -107,8 +107,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4237410778480927114}
   serializedVersion: 2
-  m_Mass: 1.2
-  m_Drag: 0
+  m_Mass: 1
+  m_Drag: 1
   m_AngularDrag: 0.3
   m_UseGravity: 1
   m_IsKinematic: 0

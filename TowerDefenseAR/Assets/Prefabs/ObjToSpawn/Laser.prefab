@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf8da656acd56d4e8d49fdc6c94764d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxBounceEnemy: 3
+  maxBounceEnemy: 5
   enemies: []
   rPoint: {fileID: 3615708004002454885}
   damage: 0
@@ -281,7 +281,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.070132285
+  m_Radius: 0.3
   m_Center: {x: 0, y: 0.006745011, z: -0.0000000065365153}
 --- !u!54 &3615708003598403596
 Rigidbody:

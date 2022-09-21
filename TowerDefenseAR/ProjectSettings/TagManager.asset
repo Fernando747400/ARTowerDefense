@@ -11,6 +11,8 @@ TagManager:
   - CenterPrefab
   - Pooler
   - Spawner
+  - Enemy_Jumper
+  - Floor
   layers:
   - Default
   - TransparentFX

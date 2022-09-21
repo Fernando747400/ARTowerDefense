@@ -27,7 +27,7 @@ public class GameplayController : MonoBehaviour
     [SerializeField] private GameObject[] spawnersGO;
     [SerializeField] private Spawner[] spawners;
 
-
+    [SerializeField]private EnemyPoolingManager enemyPoolingManager;
     private GameObject _centerGameObject;
 
 
@@ -77,34 +77,35 @@ public class GameplayController : MonoBehaviour
         countDown.gameObject.SetActive(false);
 
         print("enemies salen");
+        enemyPoolingManager.BeginGame = true;
        
-        SpawnPools();
+        //SpawnPools();
 
     }
 
-    private void SpawnPools()
-    {
-        poolersGO = GameObject.FindGameObjectsWithTag("Pooler");
-        spawnersGO = GameObject.FindGameObjectsWithTag("Spawner");
+    // private void SpawnPools()
+    // {
+    //     poolersGO = GameObject.FindGameObjectsWithTag("Pooler");
+    //     spawnersGO = GameObject.FindGameObjectsWithTag("Spawner");
 
        
 
-        for (int i = 0; i < poolersGO.Length; i++)
-        {
-            ObjectPooler obj = poolersGO[i].GetComponent<ObjectPooler>();
-            obj.StartPools();
+    //     for (int i = 0; i < poolersGO.Length; i++)
+    //     {
+    //         ObjectPooler obj = poolersGO[i].GetComponent<ObjectPooler>();
+    //         obj.StartPools();
            
-        }
-        for (int i = 0; i < spawnersGO.Length; i++)
-        {
-             Spawner spawn = spawnersGO[i].GetComponent<Spawner>();
-            spawn.SpawnerStart();
-        }
+    //     }
+    //     for (int i = 0; i < spawnersGO.Length; i++)
+    //     {
+    //          Spawner spawn = spawnersGO[i].GetComponent<Spawner>();
+    //         spawn.SpawnerStart();
+    //     }
 
         
         
 
-    }
+    // }
     IEnumerator FinalCountDown()
     {
         yield return new WaitForSeconds(2f);
