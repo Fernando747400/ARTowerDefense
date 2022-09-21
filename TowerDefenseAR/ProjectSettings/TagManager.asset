@@ -8,6 +8,7 @@ TagManager:
   - PlaneTracked
   - LaserBeam
   - Enemy
+  - CenterPrefab
   layers:
   - Default
   - TransparentFX

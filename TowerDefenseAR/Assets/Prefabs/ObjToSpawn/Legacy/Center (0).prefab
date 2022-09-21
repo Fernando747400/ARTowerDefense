@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2400214167793196141, guid: 9aabfdba0a9306b4691552a220182cb7, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: CenterPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 3590353672276378957, guid: 9aabfdba0a9306b4691552a220182cb7, type: 3}
       propertyPath: m_Materials.Array.data[0]

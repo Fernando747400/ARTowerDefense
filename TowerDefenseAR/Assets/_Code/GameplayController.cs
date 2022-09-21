@@ -29,6 +29,13 @@ public class GameplayController : MonoBehaviour
             StartCoroutine(CountDown());
         }
     }
+    
+    public void FinishedGame()
+    {
+        print("Call finished game");
+        countDown.gameObject.SetActive(true);
+        countDown.text = "Game Finished";
+    }
 
 
     bool CanStartGame()
@@ -53,5 +60,8 @@ public class GameplayController : MonoBehaviour
         print("enemies salen");
 
     }
+    
+    
+    
     
 }
