@@ -22,7 +22,6 @@ public class Enemy_Avoid : Enemy
     {
         Move();
         Vision();
-        Debug.Log(_detected);
     }
     protected override void Move()
     {
@@ -61,24 +60,8 @@ public class Enemy_Avoid : Enemy
     }
     private void Vision()
     {
-        _detected = Physics.BoxCast(transform.position, transform.lossyScale * 4f,
+        _detected = Physics.BoxCast(transform.position, transform.lossyScale,
             transform.forward, Quaternion.identity, visionDistance,_layerMask);
-        // if (hits.Length == 0) return;
-        // List <RaycastHit> hitsList = hits.ToList();
-        // foreach (var i in hitsList)
-        // {
-        //     if (hits.Contains(i)) return;
-        //     hitsList.Remove(i);
-        // }
-        //
-        // if (hitsList.Any())
-        // {
-        //     _detected = true;
-        // }
-        // else
-        // {
-        //     _detected = false;
-        // }
     }
     protected override void Prepare()
     {

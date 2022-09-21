@@ -8,7 +8,7 @@ public class DummyEnemy : MonoBehaviour
 
     void Update()
     {
-        if(live < 0)
+        if(live <= 0)
         {
             Destroy(this.gameObject);
         }
