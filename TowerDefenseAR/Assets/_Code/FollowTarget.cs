@@ -24,7 +24,10 @@ public class FollowTarget : MonoBehaviour
 
     public void Update()
     {
-        _finalRotation = LookAt(_looker.transform, _target.transform);
+        if(Target != null)
+        {
+            _finalRotation = LookAt(_looker.transform, _target.transform);
+        }
     }
 
     private Quaternion LookAt(Transform target, Transform looker)
