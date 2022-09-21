@@ -815,7 +815,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899782329}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -2069,12 +2069,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5072508764615125140, guid: dc61de3adf9af9d438188be37d8f2011, type: 3}
       propertyPath: speed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5072508764615125140, guid: dc61de3adf9af9d438188be37d8f2011, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1542983521}
+    - target: {fileID: 5072508764615125140, guid: dc61de3adf9af9d438188be37d8f2011, type: 3}
+      propertyPath: maxSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072508764615125140, guid: dc61de3adf9af9d438188be37d8f2011, type: 3}
+      propertyPath: visionDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072508764615125140, guid: dc61de3adf9af9d438188be37d8f2011, type: 3}
+      propertyPath: avoidanceStrength
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6619616244737984759, guid: dc61de3adf9af9d438188be37d8f2011, type: 3}
       propertyPath: speed
       value: 2
