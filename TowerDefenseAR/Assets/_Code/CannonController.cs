@@ -14,6 +14,7 @@ public class CannonController : MonoBehaviour
     [SerializeField] private GameObject _PitchPoint;
     [SerializeField] private GameObject _BulletPrefab;
     [SerializeField] private GameObject _BulletSpawner;
+    [SerializeField] private Animator _CatapultAnimatior;
 
     [Header("Follow Target")]
     [SerializeField] private FollowTarget _followYaw;
@@ -27,6 +28,10 @@ public class CannonController : MonoBehaviour
     public GameObject Enemy;
 
     private Vector3 _direction;
+    private float cooldown;
+    private float currentCool;
+    private float enemySearchCool;
+    private float currentEnemySearchCool;
 
     private void Start()
     {
@@ -35,6 +40,8 @@ public class CannonController : MonoBehaviour
         _enemySeeker.SphereCastPosition = this.transform.position;
         _enemySeeker.SphereCastRadius = this.gameObject.GetComponent<SphereCollider>().radius;
         _enemySeeker.SphereCastDistance = this.gameObject.GetComponent<SphereCollider>().radius;
+        cooldown = 3f;
+        enemySearchCool = 1f;
     }
 
 
@@ -45,9 +52,27 @@ public class CannonController : MonoBehaviour
             _YawPoint.transform.rotation = _followYaw.FinalRotation;
             _PitchPoint.transform.rotation = _followPitch.FinalRotation;
             RotateSpecial(_PitchPoint.transform.rotation.eulerAngles);
-            if (Input.GetKeyDown(KeyCode.O)) Shoot();
+
+            if (currentCool > cooldown)
+            {
+                currentCool = 0f;
+                //Shoot();
+                Debug.Log("try to shoot");
+                _CatapultAnimatior.Play("Catapulta",0,0f);
+                //_CatapultAnimatior.SetBool("ShootAnim", true);
+                //_CatapultAnimatior.SetBool("ShootAnim", false);
+            }
         }
-       
+        else
+        {
+            if (currentEnemySearchCool > enemySearchCool)
+            {
+                currentEnemySearchCool = 0f;
+                GetMyEnemies();
+            }
+        }
+        currentCool += Time.deltaTime;
+        currentEnemySearchCool += Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -73,7 +98,7 @@ public class CannonController : MonoBehaviour
         _PitchPoint.transform.rotation = Quaternion.Euler(ChangeAngle(temporal));
     }
 
-    private void Shoot()
+    public void Shoot()
     {
         GameObject bullet;
         _direction = _BulletSpawner.transform.position - _PitchPoint.transform.position;
@@ -83,6 +108,7 @@ public class CannonController : MonoBehaviour
         bullet = Instantiate(_BulletPrefab, _BulletSpawner.transform.position, Quaternion.identity, _BulletSpawner.transform);
         bullet.GetComponent<Rigidbody>().AddForce(_direction, ForceMode.Impulse);
         bullet.transform.parent = null;
+        
     }
 
     private double CalculateAngle()

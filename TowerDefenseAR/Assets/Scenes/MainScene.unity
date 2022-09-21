@@ -510,6 +510,7 @@ MonoBehaviour:
   generatePlanesButton: {fileID: 1822214198}
   startButton: {fileID: 1556431200}
   countDown: {fileID: 7051264553652974505}
+  sceneName: MainScene
 --- !u!1 &646013221
 GameObject:
   m_ObjectHideFlags: 0
