@@ -9,6 +9,7 @@ using UnityEngine;
 public class CannonController : MonoBehaviour
 {
     [Header("Dependencies")]
+    [SerializeField] private EnemySeeker _enemySeeker;
     [SerializeField] private GameObject _YawPoint;
     [SerializeField] private GameObject _PitchPoint;
     [SerializeField] private GameObject _BulletPrefab;
@@ -23,31 +24,52 @@ public class CannonController : MonoBehaviour
     [SerializeField] private float _SpeedBullet;
     [SerializeField] private bool _isMortar;
 
-    private Vector3 _direction;
-
     public GameObject Enemy;
+
+    private Vector3 _direction;
 
     private void Start()
     {
         _followPitch.Target = Enemy;
         _followYaw.Target = Enemy;
+        _enemySeeker.SphereCastPosition = this.transform.position;
+        _enemySeeker.SphereCastRadius = this.gameObject.GetComponent<SphereCollider>().radius;
+        _enemySeeker.SphereCastDistance = this.gameObject.GetComponent<SphereCollider>().radius;
     }
 
 
     private void Update()
     {
-        _YawPoint.transform.rotation = _followYaw.FinalRotation;
-        _PitchPoint.transform.rotation = _followPitch.FinalRotation;
-        RotateSpecial();
-        if (Input.GetKeyDown(KeyCode.O)) Shoot();
+        if (Enemy != null)
+        {
+            _YawPoint.transform.rotation = _followYaw.FinalRotation;
+            _PitchPoint.transform.rotation = _followPitch.FinalRotation;
+            RotateSpecial(_PitchPoint.transform.rotation.eulerAngles);
+            if (Input.GetKeyDown(KeyCode.O)) Shoot();
+        }
+       
     }
 
-    private void RotateSpecial()
+    private void OnTriggerEnter(Collider other)
+    {
+        GetMyEnemies();
+    }
+
+    private void GetMyEnemies()
+    {
+        _enemySeeker.GetEnemies();
+        GameObject closest = _enemySeeker.Closest();
+        _followPitch.Target = closest;
+        _followYaw.Target = closest;
+        Enemy = closest;
+    }
+
+    private void RotateSpecial(Vector3 rotation)
     {
         Vector3 temporal;
-        temporal.x = _followPitch.FinalRotation.x;
-        temporal.y = _followPitch.FinalRotation.y;
-        temporal.z = _followPitch.FinalRotation.z;
+        temporal.x = rotation.x;
+        temporal.y = rotation.y;
+        temporal.z = rotation.z;
         _PitchPoint.transform.rotation = Quaternion.Euler(ChangeAngle(temporal));
     }
 
@@ -102,6 +124,7 @@ public class CannonController : MonoBehaviour
         float angle = 0f;
         if (_isMortar) angle = (float)CalculateFullAngle();
         else angle = (float)CalculateAngle();
+
         if (angle > 0) rotation.x = -angle;
         else rotation.x = angle;
 
