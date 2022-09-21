@@ -20,6 +20,14 @@ public class GameplayController : MonoBehaviour
     [SerializeField] private int numberOfPools;
     [SerializeField] private float radius = 1;
     [SerializeField] private float angleToSpawn;
+
+    [SerializeField] private GameObject[] poolersGO;
+    [SerializeField] private ObjectPooler[] poolers;
+
+    [SerializeField] private GameObject[] spawnersGO;
+    [SerializeField] private Spawner[] spawners;
+
+
     private GameObject _centerGameObject;
 
 
@@ -69,31 +77,32 @@ public class GameplayController : MonoBehaviour
         countDown.gameObject.SetActive(false);
 
         print("enemies salen");
+       
         SpawnPools();
 
     }
 
     private void SpawnPools()
     {
-        for (var i = 0; i < numberOfPools; i++)      
+        poolersGO = GameObject.FindGameObjectsWithTag("Pooler");
+        spawnersGO = GameObject.FindGameObjectsWithTag("Spawner");
+
+       
+
+        for (int i = 0; i < poolersGO.Length; i++)
         {
-             float angle = i * Mathf.PI * 2 / numberOfPools;
-             print(angle);
-             Vector3 pos =  new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
-         
-            switch (i % 3) 
-            {
-                case 0 :
-                    Instantiate(poolPrefab, pos, Quaternion.identity);
-                    break;
-                case 1 :
-                    Instantiate(poolPrefab, pos, Quaternion.identity);
-                    break;
-                case 2 :
-                    Instantiate(poolPrefab, pos, Quaternion.identity);
-                    break;
-            }
+            ObjectPooler obj = poolersGO[i].GetComponent<ObjectPooler>();
+            obj.StartPools();
+           
         }
+        for (int i = 0; i < spawnersGO.Length; i++)
+        {
+             Spawner spawn = spawnersGO[i].GetComponent<Spawner>();
+            spawn.SpawnerStart();
+        }
+
+        
+        
 
     }
     IEnumerator FinalCountDown()

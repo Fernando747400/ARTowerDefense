@@ -9,6 +9,8 @@ TagManager:
   - LaserBeam
   - Enemy
   - CenterPrefab
+  - Pooler
+  - Spawner
   layers:
   - Default
   - TransparentFX

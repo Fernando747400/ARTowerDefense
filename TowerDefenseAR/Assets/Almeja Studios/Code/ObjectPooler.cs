@@ -26,6 +26,12 @@ public class ObjectPooler : MonoBehaviour
     public Dictionary<string, Queue<GameObject>> poolDictionary;
     void Start()
     {
+        //StartPools();
+    }
+
+
+    public void StartPools()
+    {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
         foreach (Pool pool in pools)
@@ -41,13 +47,14 @@ public class ObjectPooler : MonoBehaviour
 
             poolDictionary.Add(pool.tag, objectPool);
         }
+
     }
 
     public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
     {
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.LogWarning(("Pool with tag " + tag + " doesn't excist"));
+            Debug.Log(("Pool with tag " + tag + " doesn't excist"));
             return null;
         }
         

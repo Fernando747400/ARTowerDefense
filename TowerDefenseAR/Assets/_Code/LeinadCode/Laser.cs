@@ -35,21 +35,23 @@ public class Laser : MonoBehaviour
         if (other.tag == "Enemy")
         {
             index = index + 1;
-        }
-        if(index < this.enemies.Capacity)
-        {
-            this.enemies.Insert(index, other.gameObject);
-            line.positionCount = this.enemies.Count;
-            foreach (var item in this.enemies)
+
+            if (index < this.enemies.Capacity)
             {
-                line.SetPosition(this.enemies.Count - 1, item.transform.position);
-                Debug.Log(this.enemies.Count - 1, item);
-                followTarget.Target = this.enemies[1];
-                item.GetComponent<DummyEnemy>().live--;
+                this.enemies.Insert(index, other.gameObject);
+                line.positionCount = this.enemies.Count;
+                foreach (var item in this.enemies)
+                {
+                    line.SetPosition(this.enemies.Count - 1, item.transform.position);
+                    Debug.Log(this.enemies.Count - 1, item);
+                    followTarget.Target = this.enemies[1];
+                    item.GetComponent<DummyEnemy>().live--;
+                }
             }
+
+            StartCoroutine(UpdateShoot());
         }
         
-        StartCoroutine(UpdateShoot());
     }
 
     void AddLaser()

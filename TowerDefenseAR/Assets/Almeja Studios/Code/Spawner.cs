@@ -6,6 +6,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     ObjectPooler objectPooler;
+    bool startSpawn = false;
 
     private void Start()
     {
@@ -14,6 +15,18 @@ public class Spawner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ObjectPooler.Instance.SpawnFromPool("Cube", transform.position, Quaternion.identity);
+        if(startSpawn)
+        {
+            ObjectPooler.Instance.SpawnFromPool("tank", transform.position, Quaternion.identity);
+            ObjectPooler.Instance.SpawnFromPool("jump", transform.position, Quaternion.identity);
+        }
+        
     }
+
+    public void SpawnerStart()
+    {
+        startSpawn = true;
+    }
+
+
 }
