@@ -13,6 +13,7 @@ public class ObjectPooler : MonoBehaviour
         public GameObject cubePrefab;
         public int poolSize;
     }
+    
 
     public static ObjectPooler Instance;
 
@@ -65,5 +66,10 @@ public class ObjectPooler : MonoBehaviour
         poolDictionary[tag].Enqueue(objectToSpawn);
 
         return objectToSpawn;
+    }
+
+    private void Update()
+    {
+        
     }
 }

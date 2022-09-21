@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class SteeringBehaviours : MonoBehaviour
 {
@@ -6,19 +8,20 @@ public class SteeringBehaviours : MonoBehaviour
     [HideInInspector]public Vector3 currentVector;
     public GameObject target;
     
-    public Vector3 Seek(Vector3 targetPos)
+    //SteeringBehaviours always returns a normalized vector
+    protected Vector3 Seek(Vector3 targetPos)
     {
         Vector3 distanceVector = targetPos - transform.position;
         Vector3 steeringForce = distanceVector + currentVector;
         Vector3 result = Vector3.Normalize(distanceVector + steeringForce);
         return result;
     }
-    public Vector3 Flee(Vector3 targetPos)
+    protected Vector3 Flee(Vector3 targetPos)
     {
         Vector3 result = Seek(targetPos) * -1;
         return result;
     }
-    public float Arrival(Vector3 targetPos)
+    protected float Arrival(Vector3 targetPos)
     {
         float result;
         Vector3 distanceVector = targetPos - transform.position;
@@ -46,10 +49,11 @@ public class SteeringBehaviours : MonoBehaviour
         }
         return result;
     }
-    public Vector3 AvoidObstacles(Vector3 targetPos)
+    protected Vector3 AvoidObstacles(Vector3 obstaclePos)
     {
-        
-        Vector3 result = Seek(targetPos);
+        Vector3 distanceVector = obstaclePos - transform.position;
+        Vector3 avoidanceVector = Vector3.Cross(Vector3.up, distanceVector);
+        Vector3 result = Vector3.Normalize(avoidanceVector);
         return result;
     }
 

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - TrackedImage
   - PlaneTracked
+  - LaserBeam
+  - Enemy
+  - CenterPrefab
   layers:
   - Default
   - TransparentFX

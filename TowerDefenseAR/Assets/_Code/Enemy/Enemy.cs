@@ -9,11 +9,11 @@ public class Enemy : SteeringBehaviours
         Prepare();
     }
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         Move();
     }
-    void Move()
+    protected virtual void Move()
     {
         if (rb.velocity.magnitude >= maxSpeed)
         {
@@ -27,18 +27,13 @@ public class Enemy : SteeringBehaviours
             rb.AddForce(steering * speed);
         }
     }
-    void Prepare()
+    protected virtual void Prepare()
     {
-        if (rb == null)
+        if (rb != null) return;
+        try
         {
-            try
-            {
-                rb = gameObject.GetComponent<Rigidbody>();
-            }
-            catch
-            {
-                Debug.LogWarning("Could not find RigidBody");
-            }
-        } 
+            rb = gameObject.GetComponent<Rigidbody>();
+        }
+        catch { Debug.LogWarning("Could not find RigidBody"); }
     }
 }
