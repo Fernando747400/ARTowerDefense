@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4237410778480927109}
-  - component: {fileID: 4237410778480927115}
+  - component: {fileID: 1110509989862889702}
   - component: {fileID: 4237410778480927110}
   - component: {fileID: 4237410778480927111}
   m_Layer: 8
@@ -118,8 +118,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &4237410778480927115
-SphereCollider:
+--- !u!136 &1110509989862889702
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -128,9 +128,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.72
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &4237410778480927110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,14 +144,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331ed3a8c7761564baa2368dd15f5614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
   currentVector: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
-  speed: 0.75
-  behaviour: seek
-  avoidanceStrength: 0.5
+  maxSpeed: 3
   rb: {fileID: 0}
-  jumpForce: 500
-  gravForce: 1
+  jumpForce: 400
+  jumpDelay: 5
 --- !u!54 &4237410778480927111
 Rigidbody:
   m_ObjectHideFlags: 0
