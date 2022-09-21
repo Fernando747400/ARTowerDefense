@@ -67,18 +67,18 @@ public class ImageIdentifier : MonoBehaviour
                 //     
                 //     break;
                 
-                case "Center":
-                    foreach (var obj in _gameObjects)
-                    {
-                        if (obj.name == "Center")
-                        {
-                            reference.text = " Mover Game Objetc = " +obj.name + " pos= "+ trackedImage.transform.position;
-                            PositionsController pos = obj.GetComponent<PositionsController>();
-                            //pos.RePostionGO(trackedImage, reference);
-                        }
-                    }
-                    
-                    break;
+                // case "Center":
+                //     foreach (var obj in _gameObjects)
+                //     {
+                //         if (obj.name == "Center")
+                //         {
+                //             reference.text = " Mover Game Objetc = " +obj.name + " pos= "+ trackedImage.transform.position;
+                //             PositionsController pos = obj.GetComponent<PositionsController>();
+                //             //pos.RePostionGO(trackedImage, reference);
+                //         }
+                //     }
+                //     
+                //     break;
 
                 
             }
