@@ -40,18 +40,23 @@ public class CannonController : MonoBehaviour
 
     private void Update()
     {
-        _YawPoint.transform.rotation = _followYaw.FinalRotation;
-        _PitchPoint.transform.rotation = _followPitch.FinalRotation;
-        RotateSpecial();
-        if (Input.GetKeyDown(KeyCode.O)) Shoot();
+        if (Enemy != null)
+        {
+            _YawPoint.transform.rotation = _followYaw.FinalRotation;
+            _PitchPoint.transform.rotation = _followPitch.FinalRotation;
+            RotateSpecial();
+            if (Input.GetKeyDown(KeyCode.O)) Shoot();
+        }
+       
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         _enemySeeker.GetEnemies();
         GameObject closest = _enemySeeker.Closest();
         _followPitch.Target = closest;
         _followYaw.Target = closest;
+        Enemy = closest;
     }
 
     private void RotateSpecial()
