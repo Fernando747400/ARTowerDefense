@@ -27,7 +27,7 @@ public class Enemy : SteeringBehaviours
             rb.AddForce(steering * speed);
         }
     }
-    private void Prepare()
+    protected virtual void Prepare()
     {
         if (rb != null) return;
         try

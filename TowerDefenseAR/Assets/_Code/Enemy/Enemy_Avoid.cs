@@ -1,52 +1,88 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Enemy_Avoid : Enemy
 {
     [SerializeField] private float avoidanceStrength;
     private RaycastHit[] hits;
+    [SerializeField] private float visionDistance = 1f;
+    private LayerMask _layerMask;
+    private bool _detected;
+    private Vector3 steering = new Vector3(0f, 0f, 0f);
+    private Vector3 limitingForce = new Vector3(0f, 0f, 0f);
 
+    public override void Start()
+    {
+        base.Start();
+        Prepare();
+
+    }
     // Update is called once per frame
     protected override void Update()
     {
         Move();
+        Vision();
+        Debug.Log(_detected);
     }
     protected override void Move()
     {
         if (rb.velocity.magnitude >= maxSpeed)
         {
-            Vector3 steering = Seek(target.transform.position);
-            Vector3 limitingForce = steering * -1;
-            rb.AddForce((steering + limitingForce) * speed);
+            switch (_detected)
+            {
+                case false:
+                steering = Seek(target.transform.position);
+                steering = limitingForce = steering * -1;
+                rb.AddForce((steering + limitingForce) * speed);
+                    break;
+                case true:
+                    steering = (AvoidObstacles(target.transform.position));
+                    steering += Seek(target.transform.position);
+                limitingForce = steering * -1;
+                rb.AddForce((steering + limitingForce) * speed);
+                    break;
+            }
         }
         else
         {
-            Vector3 steering = Seek(target.transform.position);
-            rb.AddForce(steering * speed);
+            switch (_detected)
+            {
+                case false:
+                steering = Seek(target.transform.position);
+                rb.AddForce(steering * speed);
+                    break;
+                case true:
+                    steering = (AvoidObstacles(target.transform.position));
+                    steering += Seek(target.transform.position);
+                    rb.AddForce(steering * speed);
+                    break;
+            }
         }
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        if (!other.CompareTag("Obstacle")) return;
-        Vector3 avoidanceVector = AvoidObstacles(other.transform.position);
-        rb.AddForce(avoidanceVector * avoidanceStrength);
-    }
-
-    void CheckVision()
-    {
-        
-        
     }
     private void Vision()
     {
-        // hits = Physics.BoxCastAll(Vector3.forward * 10,Vector3.one*5f,Vector3.forward);
-        // Queue<RaycastHit> listHits = hits.toList();
-        // foreach (var hit in hits)
+        _detected = Physics.BoxCast(transform.position, transform.lossyScale * 4f,
+            transform.forward, Quaternion.identity, visionDistance,_layerMask);
+        // if (hits.Length == 0) return;
+        // List <RaycastHit> hitsList = hits.ToList();
+        // foreach (var i in hitsList)
         // {
-        //     if (!hits.Contains(listHits[])) return;
-        //
+        //     if (hits.Contains(i)) return;
+        //     hitsList.Remove(i);
         // }
-        
+        //
+        // if (hitsList.Any())
+        // {
+        //     _detected = true;
+        // }
+        // else
+        // {
+        //     _detected = false;
+        // }
+    }
+    protected override void Prepare()
+    {
+        base.Prepare();
+        _layerMask =~ LayerMask.GetMask("Enemy");
     }
 }
