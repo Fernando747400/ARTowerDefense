@@ -9,6 +9,7 @@ using UnityEngine;
 public class CannonController : MonoBehaviour
 {
     [Header("Dependencies")]
+    [SerializeField] private EnemySeeker _enemySeeker;
     [SerializeField] private GameObject _YawPoint;
     [SerializeField] private GameObject _PitchPoint;
     [SerializeField] private GameObject _BulletPrefab;
@@ -23,14 +24,17 @@ public class CannonController : MonoBehaviour
     [SerializeField] private float _SpeedBullet;
     [SerializeField] private bool _isMortar;
 
-    private Vector3 _direction;
-
     public GameObject Enemy;
+
+    private Vector3 _direction;
 
     private void Start()
     {
         _followPitch.Target = Enemy;
         _followYaw.Target = Enemy;
+        _enemySeeker.SphereCastPosition = this.transform.position;
+        _enemySeeker.SphereCastRadius = this.gameObject.GetComponent<SphereCollider>().radius;
+        _enemySeeker.SphereCastDistance = this.gameObject.GetComponent<SphereCollider>().radius;
     }
 
 
@@ -40,6 +44,14 @@ public class CannonController : MonoBehaviour
         _PitchPoint.transform.rotation = _followPitch.FinalRotation;
         RotateSpecial();
         if (Input.GetKeyDown(KeyCode.O)) Shoot();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        _enemySeeker.GetEnemies();
+        GameObject closest = _enemySeeker.Closest();
+        _followPitch.Target = closest;
+        _followYaw.Target = closest;
     }
 
     private void RotateSpecial()
