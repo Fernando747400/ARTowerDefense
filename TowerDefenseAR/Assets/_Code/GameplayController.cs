@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameplayController : MonoBehaviour
@@ -11,6 +13,7 @@ public class GameplayController : MonoBehaviour
     [SerializeField] private GameObject startButton;
 
     [SerializeField] private Text countDown;
+    [SerializeField] private string sceneName;
 
 
     private void Start()
@@ -30,11 +33,12 @@ public class GameplayController : MonoBehaviour
         }
     }
     
-    public void FinishedGame()
+    public void CallFinishedGame()
     {
         print("Call finished game");
         countDown.gameObject.SetActive(true);
         countDown.text = "Game Finished";
+        StartCoroutine(FinalCountDown());
     }
 
 
@@ -60,8 +64,38 @@ public class GameplayController : MonoBehaviour
         print("enemies salen");
 
     }
+
+    IEnumerator FinalCountDown()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(sceneName);
+    }
     
-    
+    // #region Editor
+    //
+    // public void CallGameFinished()
+    // {
+    //     CallFinishedGame();
+    // }
+    //
+
+    // #endregion
     
     
 }
+
+// [CustomEditor((typeof(GameplayController)))]
+// public class GamepayEditor : Editor
+// {
+    // public override void OnInspectorGUI()
+    // {
+        // DrawDefaultInspector();
+        // GameplayController gameplayController = target as GameplayController;
+
+        // if (GUILayout.Button("CALL FINAL GAME"))
+        // {
+            // gameplayController.CallGameFinished();
+            
+        // }
+// }
+// }

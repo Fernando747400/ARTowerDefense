@@ -40,7 +40,7 @@ public class TowerDamage : MonoBehaviour
     {
         if (hp <= 0)
         {
-            gameplayController.FinishedGame();
+            gameplayController.CallFinishedGame();
             return true; 
         }
         return false;
