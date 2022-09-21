@@ -6,6 +6,7 @@ public class Enemy : SteeringBehaviours
     [HideInInspector]public Rigidbody rb;
     public virtual void Start()
     {
+        base.Start();
         Prepare();
     }
     // Update is called once per frame
