@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CurrencyManager : MonoBehaviour
+public class CurrencyManager_CodeStore : MonoBehaviour
 {
     private int _coinsCurrent;
 
