@@ -129,7 +129,6 @@ public class SpawnerController_CodeXR : MonoBehaviour
         {
             Destroy(prefabs[i]);
         }
-        _centerList = new List<GameObject>();
         _turretList = new List<GameObject>();
     }
     
