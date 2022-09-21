@@ -27,6 +27,8 @@ public class EnemySeeker : MonoBehaviour
 
     public GameObject Closest()
     {
+        if (EnemiesList.Count == 0) return null;
+
         GameObject closest = EnemiesList[0];
         foreach(var item in EnemiesList)
         {

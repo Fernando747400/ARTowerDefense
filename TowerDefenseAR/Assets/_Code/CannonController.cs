@@ -44,13 +44,18 @@ public class CannonController : MonoBehaviour
         {
             _YawPoint.transform.rotation = _followYaw.FinalRotation;
             _PitchPoint.transform.rotation = _followPitch.FinalRotation;
-            RotateSpecial();
+            RotateSpecial(_PitchPoint.transform.rotation.eulerAngles);
             if (Input.GetKeyDown(KeyCode.O)) Shoot();
         }
        
     }
 
     private void OnTriggerEnter(Collider other)
+    {
+        GetMyEnemies();
+    }
+
+    private void GetMyEnemies()
     {
         _enemySeeker.GetEnemies();
         GameObject closest = _enemySeeker.Closest();
@@ -59,12 +64,12 @@ public class CannonController : MonoBehaviour
         Enemy = closest;
     }
 
-    private void RotateSpecial()
+    private void RotateSpecial(Vector3 rotation)
     {
         Vector3 temporal;
-        temporal.x = _followPitch.FinalRotation.x;
-        temporal.y = _followPitch.FinalRotation.y;
-        temporal.z = _followPitch.FinalRotation.z;
+        temporal.x = rotation.x;
+        temporal.y = rotation.y;
+        temporal.z = rotation.z;
         _PitchPoint.transform.rotation = Quaternion.Euler(ChangeAngle(temporal));
     }
 
@@ -119,6 +124,7 @@ public class CannonController : MonoBehaviour
         float angle = 0f;
         if (_isMortar) angle = (float)CalculateFullAngle();
         else angle = (float)CalculateAngle();
+
         if (angle > 0) rotation.x = -angle;
         else rotation.x = angle;
 

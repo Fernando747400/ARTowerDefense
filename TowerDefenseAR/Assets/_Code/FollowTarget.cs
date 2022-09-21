@@ -26,7 +26,7 @@ public class FollowTarget : MonoBehaviour
     {
         if(Target != null)
         {
-            _finalRotation = LookAt(_looker.transform, _target.transform);
+            _finalRotation = LookAt(_target.transform, _looker.transform);
         }
     }
 
