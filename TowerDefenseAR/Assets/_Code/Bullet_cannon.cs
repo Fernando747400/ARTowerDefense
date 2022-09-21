@@ -9,6 +9,8 @@ public class Bullet_cannon : MonoBehaviour
     public GameObject Target;
     public Vector3 Direction;
 
+    public ParticleSystem Explosion;
+
     private Rigidbody rb;
     private Vector3 initialPos;
     private bool hitSucc;
@@ -64,6 +66,7 @@ public class Bullet_cannon : MonoBehaviour
 
     private void DestroyBullet()
     {
+        Instantiate(Explosion, this.transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
 }

@@ -130,3 +130,4 @@ MonoBehaviour:
   Speed: 5
   Target: {fileID: 0}
   Direction: {x: 0, y: 0, z: 0}
+  Explosion: {fileID: 6845619343436609933, guid: 8df81380243cba349bb4070d150bf478, type: 3}
