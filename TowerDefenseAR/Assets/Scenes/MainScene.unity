@@ -511,6 +511,10 @@ MonoBehaviour:
   startButton: {fileID: 1556431200}
   countDown: {fileID: 7051264553652974505}
   sceneName: MainScene
+  poolPrefab: {fileID: 5147849137948921329, guid: a0b5e5910c4269c4582f1c0399b8541b, type: 3}
+  numberOfPools: 4
+  radius: 1
+  angleToSpawn: 90
 --- !u!1 &646013221
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,6 +962,10 @@ PrefabInstance:
     - target: {fileID: 7051264553555428972, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7051264553655229049, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -3.30365
       objectReference: {fileID: 0}
     - target: {fileID: 7051264554310975505, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
       propertyPath: m_AnchorMax.y

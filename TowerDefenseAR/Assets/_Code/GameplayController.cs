@@ -15,6 +15,13 @@ public class GameplayController : MonoBehaviour
     [SerializeField] private Text countDown;
     [SerializeField] private string sceneName;
 
+    [Header("Pool")] 
+    [SerializeField] private GameObject poolPrefab;
+    [SerializeField] private int numberOfPools;
+    [SerializeField] private float radius = 1;
+    [SerializeField] private float angleToSpawn;
+    private GameObject _centerGameObject;
+
 
     private void Start()
     {
@@ -44,10 +51,10 @@ public class GameplayController : MonoBehaviour
 
     bool CanStartGame()
     {
-        GameObject centerGameObject = GameObject.FindWithTag("CenterPrefab");
+       _centerGameObject = GameObject.FindWithTag("CenterPrefab");
         GameObject turret = GameObject.FindWithTag("TrackedImage");
 
-        if (centerGameObject != null && turret!=null)  return true;
+        if (_centerGameObject != null && turret!=null)  return true;
         
         return false;
     }
@@ -62,9 +69,33 @@ public class GameplayController : MonoBehaviour
         countDown.gameObject.SetActive(false);
 
         print("enemies salen");
+        SpawnPools();
 
     }
 
+    private void SpawnPools()
+    {
+        for (var i = 0; i < numberOfPools; i++)      
+        {
+             float angle = i * Mathf.PI * 2 / numberOfPools;
+             print(angle);
+             Vector3 pos =  new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
+         
+            switch (i % 3) 
+            {
+                case 0 :
+                    Instantiate(poolPrefab, pos, Quaternion.identity);
+                    break;
+                case 1 :
+                    Instantiate(poolPrefab, pos, Quaternion.identity);
+                    break;
+                case 2 :
+                    Instantiate(poolPrefab, pos, Quaternion.identity);
+                    break;
+            }
+        }
+
+    }
     IEnumerator FinalCountDown()
     {
         yield return new WaitForSeconds(2f);
