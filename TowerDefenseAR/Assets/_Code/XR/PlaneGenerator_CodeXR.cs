@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.UI;
 
-public class PlaneController_CodeXR : MonoBehaviour
+public class PlaneGenerator_CodeXR : MonoBehaviour
 {
     
     public List<ARPlane> arPlanes;
