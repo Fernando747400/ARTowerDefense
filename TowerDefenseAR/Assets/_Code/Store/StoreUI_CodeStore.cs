@@ -15,6 +15,6 @@ public class StoreUI_CodeStore : MonoBehaviour
 
     private void Update()
     {
-        coinsText.text = _currencyManager.CoinsCurrent.ToString();
+        coinsText.text = "Coins: " + _currencyManager.CoinsCurrent;
     }
 }

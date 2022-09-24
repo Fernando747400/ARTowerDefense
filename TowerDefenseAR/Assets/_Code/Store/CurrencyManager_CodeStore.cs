@@ -6,7 +6,7 @@ public class CurrencyManager_CodeStore : MonoBehaviour
 {
     public static CurrencyManager_CodeStore Instance;
     
-    private int _coinsCurrent;
+    [SerializeField] private int _coinsCurrent;
     public int turretsCost = 2;
     public int CoinsCurrent { get => _coinsCurrent; }
 
