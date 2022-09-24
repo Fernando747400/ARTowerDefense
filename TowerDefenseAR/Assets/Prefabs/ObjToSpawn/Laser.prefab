@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2011327596385082534}
   - component: {fileID: 7067548981452368440}
   - component: {fileID: 1662663554508535527}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3429505791382783939}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Laser
   m_TagString: TrackedImage
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 3615708003598403597}
   - component: {fileID: 3615708003598403596}
   - component: {fileID: 3615708003598403598}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 3615708004002454809}
   - component: {fileID: 3615708004002454808}
   - component: {fileID: 3615708004002454887}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pivote
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 1205054353956747653}
   - component: {fileID: 383577034238253992}
   - component: {fileID: 4875941527063839289}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

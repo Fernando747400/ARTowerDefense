@@ -99,6 +99,9 @@ MonoBehaviour:
   rb: {fileID: 0}
   avoidanceStrength: 2
   visionDistance: 20
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 179
 --- !u!54 &7570577391167754929
 Rigidbody:
   m_ObjectHideFlags: 0

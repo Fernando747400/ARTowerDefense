@@ -22,6 +22,7 @@ public class DummyEnemy : MonoBehaviour
     {
         if(live <= 0)
         {
+            CurrencyManager_CodeStore.Instance.AddCoins(2);
             RestartPool();
         }
     }

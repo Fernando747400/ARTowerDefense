@@ -6,7 +6,7 @@ public class Enemy_Avoid : Enemy
     [SerializeField] private float avoidanceStrength;
     private RaycastHit[] hits;
     [SerializeField] private float visionDistance = 1f;
-    private LayerMask _layerMask;
+    [SerializeField] private LayerMask _layerMask;
     private bool _detected;
     private Vector3 steering = new Vector3(0f, 0f, 0f);
     private Vector3 limitingForce = new Vector3(0f, 0f, 0f);
@@ -63,9 +63,11 @@ public class Enemy_Avoid : Enemy
         _detected = Physics.BoxCast(transform.position, transform.lossyScale,
             transform.forward, Quaternion.identity, visionDistance,_layerMask);
     }
-    protected override void Prepare()
-    {
-        base.Prepare();
-        _layerMask =~ LayerMask.GetMask("Enemy");
-    }
+    // protected override void Prepare()
+    // {
+    //     base.Prepare();
+    //     // // _layerMask =~ LayerMask.GetMask("Enemy");
+    //     // _layerMask =~ LayerMask.GetMask("Ignore Raycast");
+    //     // Debug.Log(_layerMask.value);
+    // }
 }
