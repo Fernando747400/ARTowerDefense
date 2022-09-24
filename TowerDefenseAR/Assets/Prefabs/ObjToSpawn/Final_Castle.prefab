@@ -107,7 +107,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7597034714419454018}
-  - component: {fileID: 7545904441022954527}
   m_Layer: 0
   m_Name: Final_Castle
   m_TagString: Untagged
@@ -136,21 +135,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7545904441022954527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7597034714419454019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f46a63bd39de5b242936dcdfa312e353, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 10
-  controller: {fileID: 0}
-  gameplayController: {fileID: 0}
 --- !u!1001 &1571261981107781403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -305,6 +289,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.1428328, y: 2.9520273, z: 4.5207605}
   m_Center: {x: -0.25817537, y: 0.9760142, z: -0.10761432}
+--- !u!114 &3968079283644417042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9017531600528275823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46a63bd39de5b242936dcdfa312e353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10
+  controller: {fileID: 0}
+  gameplayController: {fileID: 0}
 --- !u!1001 &5480467387507586937
 PrefabInstance:
   m_ObjectHideFlags: 0
