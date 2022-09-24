@@ -481,6 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d6ea9f982a4b34fbffc96e69f63a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coinsCurrent: 10
   turretsCost: 2
 --- !u!114 &617073907
 MonoBehaviour:
@@ -511,6 +512,7 @@ MonoBehaviour:
   generatePlanesButton: {fileID: 1822214198}
   startButton: {fileID: 1556431200}
   countDown: {fileID: 7051264553652974505}
+  text_Healt: {fileID: 7051264553652974506}
   sceneName: MainScene
   poolPrefab: {fileID: 5147849137948921329, guid: a0b5e5910c4269c4582f1c0399b8541b, type: 3}
   numberOfPools: 4
@@ -850,6 +852,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -393
       objectReference: {fileID: 0}
+    - target: {fileID: 4371409857561726751, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4666007837608361697, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -986,9 +992,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7051264553638305326, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7051264553655229049, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -3.30365
+      objectReference: {fileID: 0}
+    - target: {fileID: 7051264553655229049, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -8.811768
+      objectReference: {fileID: 0}
+    - target: {fileID: 7051264553802648384, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.2176514
       objectReference: {fileID: 0}
     - target: {fileID: 7051264554310975505, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1022,6 +1040,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 646013223}
+    - target: {fileID: 7051264554310975506, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8134720784947974473, guid: 7e5367c97ca618a4c80a1fbd81ec398c, type: 3}
     - target: {fileID: 7051264554412278464, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1033,7 +1055,7 @@ PrefabInstance:
     - target: {fileID: 7051264554412278464, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 2653708646704504185, guid: b56661ce8cd68194fb354a79b159692c, type: 3}
+      objectReference: {fileID: 7597034714419454019, guid: 4227dddf4c9c5924baee09848633dce1, type: 3}
     - target: {fileID: 7051264554412278479, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1115,6 +1137,17 @@ PrefabInstance:
 --- !u!114 &7051264553652974505 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1752487363526234386, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
+  m_PrefabInstance: {fileID: 7051264553652974504}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7051264553652974506 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7301138767876340307, guid: 890de5ee0633810478ee62998fff65c0, type: 3}
   m_PrefabInstance: {fileID: 7051264553652974504}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

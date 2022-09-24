@@ -1,17 +1,32 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerDamage : MonoBehaviour
 {
+    public static TowerDamage Instance;
     public float hp;
     public GameObject controller;
     public GameplayController gameplayController;
+
+    public float CenterHealth
+    {
+        get => hp;
+    }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
         controller = GameObject.Find("GameplayControllers");
         gameplayController = controller.GetComponent<GameplayController>();
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

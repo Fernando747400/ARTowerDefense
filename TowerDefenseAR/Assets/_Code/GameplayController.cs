@@ -8,11 +8,13 @@ using UnityEngine.UI;
 
 public class GameplayController : MonoBehaviour
 {
+    
     [SerializeField] private GameObject resetPlanesButton;
     [SerializeField] private GameObject generatePlanesButton;
     [SerializeField] private GameObject startButton;
 
     [SerializeField] private Text countDown;
+    [SerializeField] private Text text_Healt;
     [SerializeField] private string sceneName;
 
     [Header("Pool")] 
@@ -36,13 +38,22 @@ public class GameplayController : MonoBehaviour
         countDown.gameObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (TowerDamage.Instance)
+        {
+            text_Healt.text = "Center Life: " +   TowerDamage.Instance.CenterHealth;
+        }
+
+    }
+
     public void StartGame()
     {
         if (CanStartGame())
         {
             // print("game start");
             startButton.SetActive(false);
-            resetPlanesButton.SetActive(false);
+            // resetPlanesButton.SetActive(false);
             generatePlanesButton.SetActive(false);
             StartCoroutine(CountDown());
         }

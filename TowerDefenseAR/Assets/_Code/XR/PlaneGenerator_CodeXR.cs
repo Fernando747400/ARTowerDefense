@@ -15,16 +15,6 @@ public class PlaneGenerator_CodeXR : MonoBehaviour
     // public Text reference; 
     [SerializeField] private Text textPlanes;
 
-    private void Start()
-    {
-
-    }
-
-    private void Update()
-    {
-        // if(arPlanes!=null)
-         // reference.text = "planes arPlanes = " + arPlanes.Count;
-    }
 
     private void OnEnable()
     {
